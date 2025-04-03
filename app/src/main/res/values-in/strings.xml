@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">iFormula</string>
     <string name="welcome_title">Selamat datang di iFormula!</string>
-    <string name="welcome_text">Ada satu titik pada 7.000 RPM di mana segalanya memudar. Mesin seolah kehilangan beratnya. Ia menghilang. Yang tersisa hanyalah tubuh yang bergerak menembus ruang dan waktu. Pada 7.000 RPM, di situlah kamu menemuinya. Di situlah ia menunggumu. Selamat datang, pecinta kecepatan!</string>
+    <string name="welcome_text">Ada satu titik pada 7.000 RPM di mana segalanya memudar. Mesin seolah kehilangan beratnya. Ia menghilang. Yang tersisa hanyalah tubuh yang bergerak menembus ruang dan waktu. Pada 7.000 RPM, di situlah kamu menemuinya. Di situlah ia menunggumu. \nSelamat datang, para entusias kecepatan!</string>
     <string name="what_is_f1">Apa itu F1?</string>
     <string name="drivers_teams">Pembalap &amp; Tim</string>
     <string name="circuit_schedule">Sirkuit &amp; Jadwal</string>
@@ -10,4 +10,27 @@
     <string name="calculate">Kalkulasi</string>
     <string name="learn_more">Lebih Banyak</string>
     <string name="about">Tentang Kami</string>
+
+    1. F1 Screen
+    <string name="f1_explanation">Formula 1 adalah olahraga balap mobil kelas tertinggi di dunia. Para pembalap mengendarai mobil balap khusus dengan teknologi canggih pada sirkuit yang dirancang khusus. Setiap musim terdiri dari serangkaian balapan (Grand Prix) di berbagai negara. Tim-tim besar bersaing memperebutkan dua gelar utama: Kejuaraan Pembalap dan Kejuaraan Konstruktor.</string>
+    <string name="f1_technology_explanation">F1 terkenal dengan kecepatannya yang tinggi, strategi balapan yang kompleks, dan teknologi mutakhir yang terus berkembang. Ini adalah kombinasi sempurna antara keahlian mengemudi, rekayasa mesin, dan strategi tim.</string>
+    <string name="f1_rules">Aturan F1</string>
+    <string name="general_f1_rules">Aturan umum F1:</string>
+    <string name="rule_teams_drivers">Setiap tim memiliki 2 pembalap dan setiap pembalap menggunakan 1 mobil.</string>
+    <string name="rule_race_length">Balapan biasanya sepanjang 305 km atau sekitar 2 jam</string>
+    <string name="rule_qualifying">Kualifikasi dilakukan sehari sebelum balapan untuk menentukan posisi start</string>
+    <string name="rule_tire_change">Pembalap harus mengganti ban minimal satu kali per balapan</string>
+    <string name="rule_points">Poin diberikan kepada 10 pembalap pertama (25 poin untuk juara, 18 untuk posisi kedua, dst.)</string>
+    <string name="rule_fastest_lap">Pembalap tercepat dalam balapan mendapatkan 1 poin bonus</string>
+    <string name="rule_car_upgrade">Tim dapat meningkatkan mobil mereka sepanjang musim, tetapi ada batasan anggaran</string>
+    <string name="rule_fuel_weight">Ada aturan ketat tentang bahan bakar dan berat mobil</string>
+    <string name="rule_engines">Mobil F1 menggunakan mesin hybrid V6 turbo</string>
+    <string name="rule_penalties">Ada penalti untuk pelanggaran aturan seperti start dari pit lane atau mundur beberapa posisi grid</string>
+    <string name="rule_drs">DRS (Drag Reduction System) yang memungkinkan pembalap membuka sayap belakang di zona tertentu jika jarak dengan mobil di depan kurang dari 1 detik, membantu untuk menyalip.</string>
+    <string name="tire_cars">Ban Mobil</string>
+    <string name="tire_c1">C1 (Putih Hard) - Paling keras dan tahan lama, tetapi grip paling rendah</string>
+    <string name="tire_c2">C2 (Kuning Medium) - Seimbang antara ketahanan dan grip</string>
+    <string name="tire_c3">C3 (Merah Soft) - Grip bagus tetapi umur pendek, cocok untuk kualifikasi</string>
+    <string name="tire_c4">C4 (Hijau Intermediate) - Untuk lintasan semi basah</string>
+    <string name="tire_c5">C5 (Biru Wet) - Untuk kondisi hujan deras</string>
 </resources>

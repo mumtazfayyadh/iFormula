@@ -77,12 +77,13 @@ fun HomeScreen(navController: NavController) {
             // Welcoming
             Text(
                 text = stringResource(id = R.string.welcome_title),
-                style = MaterialTheme.typography.headlineMedium
+                style = MaterialTheme.typography.headlineMedium,
             )
 
             Text(
                 text = stringResource(id = R.string.welcome_text),
                 style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Justify,
                 modifier = Modifier.padding(vertical = 8.dp)
             )
 

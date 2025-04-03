@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">iFormula</string>
     <string name="welcome_title">Welcome To iFormula!</string>
-    <string name="welcome_text">There\'s a point at 7,000 RPMs where everything fades. The machine becomes weightless. It disappears. All that\'s left, a body moving through space, and time. At 7,000 RPM, that\'s where you meet it. That\'s where it waits for you. Welcome, speed enthusiast!</string>
+    <string name="welcome_text">There\'s a point at 7,000 RPMs where everything fades. The machine becomes weightless. It disappears. All that\'s left, a body moving through space, and time. At 7,000 RPM, that\'s where you meet it. That\'s where it waits for you. \nWelcome, speed enthusiast!</string>
     <string name="what_is_f1">What is F1?</string>
     <string name="drivers_teams">Driver &amp; Teams</string>
     <string name="circuit_schedule">Circuit &amp; Schedule</string>
@@ -9,4 +9,27 @@
     <string name="calculate">Calculate</string>
     <string name="learn_more">Learn More</string>
     <string name="about">About Us</string>
+
+    1. F1 Screen
+    <string name="f1_explanation">Formula 1 is the world\'s highest class automobile racing sport. Drivers drive specialized race cars with advanced technology on specially designed circuits. Each season consists of a series of races (Grand Prix) in different countries. Major teams compete for two main titles: Drivers Championship and Constructors Championship.</string>
+    <string name="f1_technology_explanation">F1 is famous for its high speeds, complex race strategies and constantly evolving cutting-edge technology. It is the perfect combination of driving expertise, engine engineering and team strategy.</string>
+    <string name="f1_rules">F1 Rules</string>
+    <string name="general_f1_rules">General F1 rules:</string>
+    <string name="rule_teams_drivers">Each team has 2 drivers and each driver uses 1 car.</string>
+    <string name="rule_race_length">Races are usually 305 km or about 2 hours</string>
+    <string name="rule_qualifying">Qualifying is done the day before the race to determine starting positions</string>
+    <string name="rule_tire_change">Drivers must change tires at least once per race</string>
+    <string name="rule_points">Points are awarded to the first 10 drivers (25 points for the champion, 18 for second place, etc.)</string>
+    <string name="rule_fastest_lap">Fastest driver in a race gets 1 bonus point</string>
+    <string name="rule_car_upgrade">Teams can upgrade their cars throughout the season, but there are budget restrictions</string>
+    <string name="rule_fuel_weight">There are strict rules about fuel and car weight</string>
+    <string name="rule_engines">F1 cars use V6 turbo hybrid engines</string>
+    <string name="rule_penalties">There are penalties for breaking rules such as starting from the pit lane or moving back several grid positions</string>
+    <string name="rule_drs">DRS (Drag Reduction System) that allows drivers to open the rear wing in certain zones if the distance with the car in front is less than 1 second, helping for overtaking.</string>
+    <string name="tire_cars">Tire Cars</string>
+    <string name="tire_c1">C1 (White Hard) - Hardest and most durable, but lowest grip</string>
+    <string name="tire_c2">C2 (Yellow Medium) - Balanced between durability and grip</string>
+    <string name="tire_c3">C3 (Red Soft) - Good grip but short life, suitable for qualifying</string>
+    <string name="tire_c4">C4 (Green Intermediate) - For semi-wet tracks</string>
+    <string name="tire_c5">C5 (Blue Wet) - For heavy rain conditions</string>
 </resources>
