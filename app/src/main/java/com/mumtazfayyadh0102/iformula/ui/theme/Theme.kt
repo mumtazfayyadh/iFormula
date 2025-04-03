@@ -14,6 +14,7 @@ import androidx.compose.ui.platform.LocalContext
 private val LightColorScheme = lightColorScheme(
     primary = LightF1Red,
     primaryContainer = LightF1Red
+
 )
 
 // ColorScheme mode gelap

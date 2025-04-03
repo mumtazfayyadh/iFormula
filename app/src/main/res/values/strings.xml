@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">iFormula</string>
+    <string name="welcome_title">Welcome To iFormula!</string>
+    <string name="welcome_text">There\'s a point at 7,000 RPMs where everything fades. The machine becomes weightless. It disappears. All that\'s left, a body moving through space, and time. At 7,000 RPM, that\'s where you meet it. That\'s where it waits for you. Welcome, speed enthusiast!</string>
+    <string name="what_is_f1">What is F1?</string>
+    <string name="drivers_teams">Driver &amp; Teams</string>
+    <string name="circuit_schedule">Circuit &amp; Schedule</string>
+    <string name="gallery">Gallery</string>
+    <string name="calculate">Calculate</string>
+    <string name="learn_more">Learn More</string>
+    <string name="about">About Us</string>
 </resources>
