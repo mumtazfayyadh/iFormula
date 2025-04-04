@@ -33,4 +33,39 @@
     <string name="tire_c3">C3 (Merah Soft) - Grip bagus tetapi umur pendek, cocok untuk kualifikasi</string>
     <string name="tire_c4">C4 (Hijau Intermediate) - Untuk lintasan semi basah</string>
     <string name="tire_c5">C5 (Biru Wet) - Untuk kondisi hujan deras</string>
+
+    2. Driver Screen
+    <string name="meet_teams_drivers">Tim dan Pembalap</string>
+    <string name="meet_teams_drivers_desc">Musim Formula 1 ke-75 ini terdapat 10 tim dan 20 pembalap yang akan mengikuti kejuaraan. Setiap tim membawa kekuatan dan strategi unik ke grid, menciptakan pertarungan menarik untuk memperebutkan Kejuaraan Konstruktor dan Kejuaraan Pembalap.</string>
+    <string name="mercedes">Mercedes-AMG Petronas F1 Team</string>
+    <string name="mercedes_driver_1">George Russell (#63)</string>
+    <string name="mercedes_driver_2">Kimi Antonelli (#12)</string>
+    <string name="redbull">Oracle Red Bull Racing</string>
+    <string name="redbull_driver_1">Max Verstappen (#1)</string>
+    <string name="redbull_driver_2">Liam Lawson (#11)</string>
+    <string name="ferrari">Scuderia Ferrari HP Formula 1</string>
+    <string name="ferrari_driver_1">Lewis Hamilton (#44)</string>
+    <string name="ferrari_driver_2">Charles Leclerc (#16)</string>
+    <string name="mclaren">McLaren F1 Team</string>
+    <string name="mclaren_driver_1">Lando Norris (#4)</string>
+    <string name="mclaren_driver_2">Oscar Piastri (#81)</string>
+    <string name="aston_martin">Aston Martin Aramco F1 Team</string>
+    <string name="aston_martin_driver_1">Fernando Alonso (#14)</string>
+    <string name="aston_martin_driver_2">Lance Stroll (#18)</string>
+    <string name="alpine">Alpine F1 Team</string>
+    <string name="alpine_driver_1">Pierre Gasly (#10)</string>
+    <string name="alpine_driver_2">Jack Doohan (#7)</string>
+    <string name="williams">Williams Racing</string>
+    <string name="williams_driver_1">Alexander Albon (#23)</string>
+    <string name="williams_driver_2">Carlos Sainz (#55)</string>
+    <string name="rb">Visa Cash App RB F1</string>
+    <string name="rb_driver_1">Yuki Tsunoda (#22)</string>
+    <string name="rb_driver_2">Isaac Hadjar (#6)</string>
+    <string name="sauber">Stake F1 Team Kick Sauber</string>
+    <string name="sauber_driver_1">Gabriel Bortoleto (#5)</string>
+    <string name="sauber_driver_2">Nico Hülkenberg (#27)</string>
+    <string name="haas">MoneyGram Haas F1 Team</string>
+    <string name="haas_driver_1">Oliver Bearman (#87)</string>
+    <string name="haas_driver_2">Esteban Ocon (#31)</string>
+    <string name="teams_conclusion">Tim-tim ini terus bersaing di setiap balapan untuk mengumpulkan poin dalam Kejuaraan Konstruktor, sementara para pembalap memperebutkan gelar Kejuaraan Pembalap!</string>
 </resources>
