@@ -68,4 +68,51 @@
     <string name="haas_driver_1">Oliver Bearman (#87)</string>
     <string name="haas_driver_2">Esteban Ocon (#31)</string>
     <string name="teams_conclusion">Tim-tim ini terus bersaing di setiap balapan untuk mengumpulkan poin dalam Kejuaraan Konstruktor, sementara para pembalap memperebutkan gelar Kejuaraan Pembalap!</string>
+
+    4. Calculate Scren
+    <string name="calculate_description">Mari kita hitung berapa kecepatan rata-rata pembalap di sirkuit, dengan waktu lap kita bisa mengetahui seberapa cepat para pembalap melaju!</string>
+    <string name="choose_circuit">Pilih Sirkuit</string>
+    <string name="time_lap">Waktu Lap</string>
+    <string name="time_format_hint">Text harus dalam format menit.detik.milidetik</string>
+    <string name="time_format_error">Format tidak valid. Harap gunakan m.dd.ddd (mis. 1.42.123)</string>
+    <string name="calculate_button">Hitung</string>
+    <string name="output">Hasil</string>
+    <string name="average_speed">Kecepatan Rata-rata:</string>
+    <string name="fun_fact">Fakta Menarik: Dengan kecepatan %s km/jam, Anda dapat menempuh perjalanan Jakarta-Bandung hanya dalam %2$s saja!</string>
+    <string name="share_result">Bagikan Hasil</string>
+
+    5. Circuit Screen
+    <string name="circuit_list_title">Daftar Sirkuit:</string>
+    <string name="circuit_bahrain">Bahrain (Sakhir) - 5,412 km</string>
+    <string name="circuit_saudi">Arab Saudi (Jeddah) - 6,174 km</string>
+    <string name="circuit_australia">Australia (Melbourne) - 5,278 km</string>
+    <string name="circuit_japan">Jepang (Suzuka) - 5,807 km</string>
+    <string name="circuit_china">China (Shanghai) - 5,451 km</string>
+    <string name="circuit_miami">Miami - 5,412 km</string>
+    <string name="circuit_usa_miami">AS (Miami) - 5,412 km</string>
+    <string name="circuit_monaco">Monako - 3,337 km</string>
+    <string name="circuit_canada">Kanada (Montreal) - 4,361 km</string>
+    <string name="circuit_spain">Spanyol (Barcelona) - 4,675 km</string>
+    <string name="circuit_austria">Austria (Red Bull Ring) - 4,318 km</string>
+    <string name="circuit_uk">Inggris (Silverstone) - 5,891 km</string>
+    <string name="circuit_hungary">Hungaria (Hungaroring) - 4,381 km</string>
+    <string name="circuit_belgium">Belgia (Spa-Francorchamps) - 7,004 km</string>
+    <string name="circuit_netherlands">Belanda (Zandvoort) - 4,259 km</string>
+    <string name="circuit_italy">Italia (Monza) - 5,793 km</string>
+    <string name="circuit_azerbaijan">Azerbaijan (Baku) - 6,003 km</string>
+    <string name="circuit_singapore">Singapura (Marina Bay) - 4,940 km</string>
+    <string name="circuit_usa_austin">AS (Austin) - 5,513 km</string>
+    <string name="circuit_mexico">Meksiko (Kota Meksiko) - 4,304 km</string>
+    <string name="circuit_brazil">Brasil (São Paulo) - 4,309 km</string>
+    <string name="circuit_vegas">Las Vegas - 6,120 km</string>
+    <string name="circuit_qatar">Qatar (Lusail) - 5,380 km</string>
+    <string name="circuit_abu_dhabi">Abu Dhabi (Yas Marina) - 5,281 km</string>
+
+    6. About Screen
+    <string name="about_welcome">Hai halo, terima kasih sudah berkenan menggunakan aplikasi kami! Aplikasi ini dengan tulus dibuat untuk anda yang baru ingin menyelami dunia balap F1, selamat datang wahai speed enthusiast!</string>
+    <string name="trakteer">Trakteer kopi ke developer ^^ \ntrakteer.id/lamusiuu/tip</string>
+    <string name="trakteer_kopi">Trakteer kopi ke developer</string>
+    <string name="all_rights_reserved">Semua Hak Dilindungi.</string>
+    <string name="copyright_text">Hak Cipta (c) 2025 Mumtaz Fayyadh</string>
+    <string name="license_text">Redistribusi dan penggunaan dalam bentuk sumber dan biner, dengan atau tanpa modifikasi, diizinkan asalkan kondisi berikut terpenuhi.</string>
 </resources>

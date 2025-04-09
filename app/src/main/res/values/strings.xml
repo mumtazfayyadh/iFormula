@@ -67,4 +67,51 @@
     <string name="haas_driver_1">Oliver Bearman (#87)</string>
     <string name="haas_driver_2">Esteban Ocon (#31)</string>
     <string name="teams_conclusion">These teams compete in every race to accumulate points in the Constructors Championship, while the drivers battle for the Drivers Championship title!</string>
+
+    4. Calculate Screen
+    <string name="calculate_description">Let\'s calculate what the average speed of the drivers is on the circuit, with lap times we can find out how fast the drivers are driving!</string>
+    <string name="choose_circuit">Choose Circuit</string>
+    <string name="time_lap">Time Lap</string>
+    <string name="time_format_hint">Text must be minutes.seconds.milliseconds</string>
+    <string name="time_format_error">Invalid format. Please use m.ss.sss (e.g. 1.42.123)</string>
+    <string name="calculate_button">Calculate</string>
+    <string name="output">Output</string>
+    <string name="average_speed">Average Speed:</string>
+    <string name="fun_fact">Fun Fact: With that speed of %s km/h, you could travel from Jakarta to Bandung in just %2$s!</string>
+    <string name="share_result">Share Result</string>
+
+    5. Circuit Screen
+    <string name="circuit_list_title">Circuit List:</string>
+    <string name="circuit_bahrain">Bahrain (Sakhir) - 5,412 km</string>
+    <string name="circuit_saudi">Saudi Arabia (Jeddah) - 6,174 km</string>
+    <string name="circuit_australia">Australia (Melbourne) - 5,278 km</string>
+    <string name="circuit_japan">Japan (Suzuka) - 5,807 km</string>
+    <string name="circuit_china">China (Shanghai) - 5,451 km</string>
+    <string name="circuit_miami">Miami - 5,412 km</string>
+    <string name="circuit_usa_miami">USA (Miami) - 5,412 km</string>
+    <string name="circuit_monaco">Monaco - 3,337 km</string>
+    <string name="circuit_canada">Canada (Montreal) - 4,361 km</string>
+    <string name="circuit_spain">Spain (Barcelona) - 4,675 km</string>
+    <string name="circuit_austria">Austria (Red Bull Ring) - 4,318 km</string>
+    <string name="circuit_uk">UK (Silverstone) - 5,891 km</string>
+    <string name="circuit_hungary">Hungary (Hungaroring) - 4,381 km</string>
+    <string name="circuit_belgium">Belgium (Spa-Francorchamps) - 7,004 km</string>
+    <string name="circuit_netherlands">Netherlands (Zandvoort) - 4,259 km</string>
+    <string name="circuit_italy">Italy (Monza) - 5,793 km</string>
+    <string name="circuit_azerbaijan">Azerbaijan (Baku) - 6,003 km</string>
+    <string name="circuit_singapore">Singapore (Marina Bay) - 4,940 km</string>
+    <string name="circuit_usa_austin">USA (Austin) - 5,513 km</string>
+    <string name="circuit_mexico">Mexico (Mexico City) - 4,304 km</string>
+    <string name="circuit_brazil">Brazil (São Paulo) - 4,309 km</string>
+    <string name="circuit_vegas">Las Vegas - 6,120 km</string>
+    <string name="circuit_qatar">Qatar (Lusail) - 5,380 km</string>
+    <string name="circuit_abu_dhabi">Abu Dhabi (Yas Marina) - 5,281 km</string>
+
+    6. About Screen
+    <string name="about_welcome">Hai halo, thank you for using our application! This app was sincerely made for those who are new to the world of F1 racing, welcome speed enthusiast!</string>
+    <string name="trakteer">Trakteer coffee to developer ^^ \ntrakteer.id/lamusiuu/tip</string>
+    <string name="trakteer_kopi">Buy me a coffee</string>
+    <string name="all_rights_reserved">All Rights Reserved.</string>
+    <string name="copyright_text">Copyright (c) 2025 Mumtaz Fayyadh</string>
+    <string name="license_text">Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following condition are met.</string>
 </resources>
