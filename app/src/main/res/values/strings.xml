@@ -68,6 +68,10 @@
     <string name="haas_driver_2">Esteban Ocon (#31)</string>
     <string name="teams_conclusion">These teams compete in every race to accumulate points in the Constructors Championship, while the drivers battle for the Drivers Championship title!</string>
 
+    3. Gallery Screen
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+
     4. Calculate Screen
     <string name="calculate_description">Let\'s calculate what the average speed of the drivers is on the circuit, with lap times we can find out how fast the drivers are driving!</string>
     <string name="choose_circuit">Choose Circuit</string>
@@ -112,6 +116,6 @@
     <string name="trakteer">Trakteer coffee to developer ^^ \ntrakteer.id/lamusiuu/tip</string>
     <string name="trakteer_kopi">Buy me a coffee</string>
     <string name="all_rights_reserved">All Rights Reserved.</string>
-    <string name="copyright_text">Copyright (c) 2025 Mumtaz Fayyadh</string>
+    <string name="copyright_text">Copyright (\c) 2025 Mumtaz Fayyadh</string>
     <string name="license_text">Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following condition are met.</string>
 </resources>

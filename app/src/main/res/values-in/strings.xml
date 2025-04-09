@@ -69,6 +69,10 @@
     <string name="haas_driver_2">Esteban Ocon (#31)</string>
     <string name="teams_conclusion">Tim-tim ini terus bersaing di setiap balapan untuk mengumpulkan poin dalam Kejuaraan Konstruktor, sementara para pembalap memperebutkan gelar Kejuaraan Pembalap!</string>
 
+    3. Gallery Screen
+    <string name="previous">Sebelumnya</string>
+    <string name="next">Selanjutnya</string>
+
     4. Calculate Scren
     <string name="calculate_description">Mari kita hitung berapa kecepatan rata-rata pembalap di sirkuit, dengan waktu lap kita bisa mengetahui seberapa cepat para pembalap melaju!</string>
     <string name="choose_circuit">Pilih Sirkuit</string>
@@ -113,6 +117,6 @@
     <string name="trakteer">Trakteer kopi ke developer ^^ \ntrakteer.id/lamusiuu/tip</string>
     <string name="trakteer_kopi">Trakteer kopi ke developer</string>
     <string name="all_rights_reserved">Semua Hak Dilindungi.</string>
-    <string name="copyright_text">Hak Cipta (c) 2025 Mumtaz Fayyadh</string>
+    <string name="copyright_text">Hak Cipta (\c) 2025 Mumtaz Fayyadh</string>
     <string name="license_text">Redistribusi dan penggunaan dalam bentuk sumber dan biner, dengan atau tanpa modifikasi, diizinkan asalkan kondisi berikut terpenuhi.</string>
 </resources>
