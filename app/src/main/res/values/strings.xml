@@ -83,6 +83,8 @@
     <string name="average_speed">Average Speed:</string>
     <string name="fun_fact">Fun Fact: With that speed of %s km/h, you could travel from Jakarta to Bandung in just %2$s!</string>
     <string name="share_result">Share Result</string>
+    <string name="share_result_text">I reached an average speed of %1$s km/h on the %2$s circuit using the iFormula app!</string>
+    <string name="share_via">Share via</string>
 
     5. Circuit Screen
     <string name="circuit_list_title">Circuit List:</string>

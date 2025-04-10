@@ -1,17 +1,37 @@
-package com.mumtazfayyadh0102.iformula.screen
+package com.mumtazfayyadh0102.iformula.ui.screen
 
-import android.content.res.Configuration
+ import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedCard
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,7 +46,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.mumtazfayyadh0102.iformula.R
-import com.mumtazfayyadh0102.iformula.navigation.NavigationRoute
+import com.mumtazfayyadh0102.iformula.navigation.Screen
 import com.mumtazfayyadh0102.iformula.ui.theme.DarkF1Black
 import com.mumtazfayyadh0102.iformula.ui.theme.LightF1Red
 
@@ -51,7 +71,7 @@ fun HomeScreen(navController: NavController) {
                         titleContentColor = Color.White
                     ),
                     actions = {
-                        IconButton(onClick = { navController.navigate(NavigationRoute.ABOUT) }) {
+                        IconButton(onClick = { navController.navigate(Screen.About.route) }) {
                             Icon(
                                 imageVector = Icons.Filled.Info,
                                 contentDescription = "About",
@@ -102,13 +122,13 @@ fun HomeScreen(navController: NavController) {
                     .fillMaxWidth()
                     .height(200.dp)
                     .clip(RoundedCornerShape(8.dp))
-                    .clickable { navController.navigate(NavigationRoute.WHAT_IS_F1) },
+                    .clickable { navController.navigate(Screen.WhatIsF1.route) },
                 contentScale = ContentScale.Crop
             )
 
             // Learn More Button
             Button(
-                onClick = { navController.navigate(NavigationRoute.WHAT_IS_F1) },
+                onClick = { navController.navigate(Screen.WhatIsF1.route) },
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .padding(vertical = 16.dp),
@@ -133,7 +153,7 @@ fun HomeScreen(navController: NavController) {
                 MenuCard(
                     icon = R.drawable.icon_driver,
                     title = stringResource(id = R.string.drivers_teams),
-                    onClick = { navController.navigate(NavigationRoute.DRIVERS) },
+                    onClick = { navController.navigate(Screen.Drivers.route) },
                     modifier = Modifier
                         .weight(1f)
                         .padding(end = 8.dp)
@@ -143,7 +163,7 @@ fun HomeScreen(navController: NavController) {
                 MenuCard(
                     icon = R.drawable.icon_gallery,
                     title = stringResource(id = R.string.gallery),
-                    onClick = { navController.navigate(NavigationRoute.GALLERY) },
+                    onClick = { navController.navigate(Screen.Gallery.route) },
                     modifier = Modifier
                         .weight(1f)
                         .padding(start = 8.dp)
@@ -160,7 +180,7 @@ fun HomeScreen(navController: NavController) {
                 MenuCard(
                     icon = R.drawable.icon_calculate,
                     title = stringResource(id = R.string.calculate),
-                    onClick = { navController.navigate(NavigationRoute.CALCULATE) },
+                    onClick = { navController.navigate(Screen.Calculate.route) },
                     modifier = Modifier
                         .weight(1f)
                         .padding(end = 8.dp)
@@ -170,7 +190,7 @@ fun HomeScreen(navController: NavController) {
                 MenuCard(
                     icon = R.drawable.icon_schedule,
                     title = stringResource(id = R.string.circuit_schedule),
-                    onClick = { navController.navigate(NavigationRoute.CIRCUIT) },
+                    onClick = { navController.navigate(Screen.Circuit.route) },
                     modifier = Modifier
                         .weight(1f)
                         .padding(start = 8.dp)

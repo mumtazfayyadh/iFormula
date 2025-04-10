@@ -1,5 +1,6 @@
-package com.mumtazfayyadh0102.iformula.screen
+package com.mumtazfayyadh0102.iformula.ui.screen
 
+import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -38,14 +39,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.mumtazfayyadh0102.iformula.R
 import com.mumtazfayyadh0102.iformula.model.GalleryImage
-import com.mumtazfayyadh0102.iformula.navigation.NavigationRoute
+import com.mumtazfayyadh0102.iformula.navigation.Screen
 import com.mumtazfayyadh0102.iformula.ui.theme.DarkF1Black
 import com.mumtazfayyadh0102.iformula.ui.theme.LightF1Red
 
@@ -107,7 +110,7 @@ fun GalleryScreen(navController: NavController) {
                         titleContentColor = Color.White
                     ),
                     actions = {
-                        IconButton(onClick = { navController.navigate(NavigationRoute.ABOUT) }) {
+                        IconButton(onClick = { navController.navigate(Screen.About.route) }) {
                             Icon(
                                 imageVector = Icons.Filled.Info,
                                 contentDescription = "About",
@@ -221,4 +224,11 @@ fun GalleryScreen(navController: NavController) {
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun GalleryScreenPreview() {
+    GalleryScreen(navController = NavController(LocalContext.current))
 }

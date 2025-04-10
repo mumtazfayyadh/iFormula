@@ -1,7 +1,7 @@
-package com.mumtazfayyadh0102.iformula.screen
-import com.mumtazfayyadh0102.iformula.model.Circuit
+package com.mumtazfayyadh0102.iformula.ui.screen
 
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
@@ -48,11 +48,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.mumtazfayyadh0102.iformula.R
-import com.mumtazfayyadh0102.iformula.navigation.NavigationRoute
+import com.mumtazfayyadh0102.iformula.model.Circuit
+import com.mumtazfayyadh0102.iformula.navigation.Screen
 import com.mumtazfayyadh0102.iformula.ui.theme.DarkF1Black
 import com.mumtazfayyadh0102.iformula.ui.theme.LightF1Red
 import java.util.Locale
@@ -73,7 +75,6 @@ fun CalculateScreen(navController: NavController) {
         Circuit("Silverstone", 5.831)
     )
 
-    // Gunakan mutableStateOf untuk Circuit, bukan hanya index
     var selectedCircuitIndex by rememberSaveable { mutableIntStateOf(0)}
     val selectedCircuit = circuits[selectedCircuitIndex]
     var expanded by rememberSaveable { mutableStateOf(false) }
@@ -107,7 +108,7 @@ fun CalculateScreen(navController: NavController) {
                         }
                     },
                     actions = {
-                        IconButton(onClick = { navController.navigate(NavigationRoute.ABOUT) }) {
+                        IconButton(onClick = { navController.navigate(Screen.About.route) }) {
                             Icon(
                                 imageVector = Icons.Filled.Info,
                                 contentDescription = "About",
@@ -143,7 +144,7 @@ fun CalculateScreen(navController: NavController) {
                 modifier = Modifier.padding(bottom = 24.dp)
             )
 
-            // Dropdown dengan pendekatan Box
+            // Dropdown
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -303,21 +304,25 @@ fun CalculateScreen(navController: NavController) {
 
                     // Tombol Share
                     Button(
+
                         onClick = {
-                            val shareText = "Saya mencapai kecepatan rata-rata ${
-                                String.format(
-                                    Locale.US,
-                                    "%.0f",
-                                    averageSpeed
-                                )
-                            } km/jam di sirkuit ${selectedCircuit.name} pada aplikasi iFormula!"
+                            val shareText = context.getString(
+                                R.string.share_result_text,
+                                String.format(Locale.US, "%.0f", averageSpeed),
+                                selectedCircuit.name
+
+                            )
                             val shareIntent = Intent().apply {
                                 action = Intent.ACTION_SEND
                                 putExtra(Intent.EXTRA_TEXT, shareText)
                                 type = "text/plain"
                             }
-                            context.startActivity(Intent.createChooser(shareIntent, "Bagikan melalui"))
+                            context.startActivity(Intent.createChooser(shareIntent, context.getString(R.string.share_via)))
                         },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = appBarColor,
+                            contentColor = Color.White
+                        ),
                         border = BorderStroke(
                             width = 0.5.dp,
                             color = if (isSystemInDarkTheme()) Color.White else Color.Transparent
@@ -375,4 +380,11 @@ private fun calculateTravelTime(speedKmh: Double, distanceKm: Double = 160.0): S
     } else {
         "$totalMinutes menit"
     }
+}
+
+@Preview(showBackground = true)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun CalculateScreenPreview() {
+    CalculateScreen(navController = NavController(LocalContext.current))
 }
