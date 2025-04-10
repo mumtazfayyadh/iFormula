@@ -1,6 +1,7 @@
-package com.mumtazfayyadh0102.iformula.screen
+package com.mumtazfayyadh0102.iformula.ui.screen
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -38,6 +39,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.mumtazfayyadh0102.iformula.R
@@ -193,4 +195,11 @@ fun AboutScreen(navController: NavController) {
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun AboutPreview() {
+    AboutScreen(navController = NavController(LocalContext.current))
 }

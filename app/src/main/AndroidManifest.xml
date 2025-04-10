@@ -13,7 +13,7 @@
         android:theme="@style/Theme.IFormula"
         tools:targetApi="31">
         <activity
-            android:name=".screen.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.IFormula">
             <intent-filter>
@@ -23,5 +23,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

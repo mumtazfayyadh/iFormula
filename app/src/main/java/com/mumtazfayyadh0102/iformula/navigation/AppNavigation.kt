@@ -4,23 +4,13 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.mumtazfayyadh0102.iformula.screen.AboutScreen
-import com.mumtazfayyadh0102.iformula.screen.CalculateScreen
-import com.mumtazfayyadh0102.iformula.screen.CircuitScreen
-import com.mumtazfayyadh0102.iformula.screen.DriverScreen
-import com.mumtazfayyadh0102.iformula.screen.GalleryScreen
-import com.mumtazfayyadh0102.iformula.screen.HomeScreen
-import com.mumtazfayyadh0102.iformula.screen.WhatIsF1Screen
-
-object NavigationRoute {
-    const val HOME = "home"
-    const val WHAT_IS_F1 = "what_is_f1"
-    const val DRIVERS = "drivers"
-    const val CIRCUIT = "circuit"
-    const val GALLERY = "gallery"
-    const val CALCULATE = "calculate"
-    const val ABOUT = "about"
-}
+import com.mumtazfayyadh0102.iformula.ui.screen.AboutScreen
+import com.mumtazfayyadh0102.iformula.ui.screen.CalculateScreen
+import com.mumtazfayyadh0102.iformula.ui.screen.CircuitScreen
+import com.mumtazfayyadh0102.iformula.ui.screen.DriverScreen
+import com.mumtazfayyadh0102.iformula.ui.screen.GalleryScreen
+import com.mumtazfayyadh0102.iformula.ui.screen.HomeScreen
+import com.mumtazfayyadh0102.iformula.ui.screen.WhatIsF1Screen
 
 @Composable
 fun AppNavigation() {
@@ -28,29 +18,28 @@ fun AppNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination = NavigationRoute.HOME
+        startDestination = Screen.Home.route
     ) {
-        composable(NavigationRoute.HOME) {
+        composable(Screen.Home.route) {
             HomeScreen(navController = navController)
         }
-        composable(NavigationRoute.WHAT_IS_F1) {
+        composable(Screen.WhatIsF1.route) {
             WhatIsF1Screen(navController = navController)
         }
-        composable(NavigationRoute.DRIVERS) {
+        composable(Screen.Drivers.route) {
             DriverScreen(navController = navController)
         }
-        composable(NavigationRoute.CIRCUIT) {
+        composable(Screen.Circuit.route) {
             CircuitScreen(navController = navController)
         }
-        composable(NavigationRoute.GALLERY) {
+        composable(Screen.Gallery.route) {
             GalleryScreen(navController = navController)
         }
-        composable(NavigationRoute.CALCULATE) {
+        composable(Screen.Calculate.route) {
             CalculateScreen(navController = navController)
         }
-        composable(NavigationRoute.ABOUT) {
+        composable(Screen.About.route) {
             AboutScreen(navController = navController)
         }
     }
 }
-

@@ -1,4 +1,4 @@
-package com.mumtazfayyadh0102.iformula.screen
+package com.mumtazfayyadh0102.iformula
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

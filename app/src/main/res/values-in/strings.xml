@@ -84,6 +84,8 @@
     <string name="average_speed">Kecepatan Rata-rata:</string>
     <string name="fun_fact">Fakta Menarik: Dengan kecepatan %s km/jam, Anda dapat menempuh perjalanan Jakarta-Bandung hanya dalam %2$s saja!</string>
     <string name="share_result">Bagikan Hasil</string>
+    <string name="share_result_text">Saya mencapai kecepatan rata-rata %1$s km/jam di sirkuit %2$s pada aplikasi iFormula!</string>
+    <string name="share_via">Bagikan melalui</string>
 
     5. Circuit Screen
     <string name="circuit_list_title">Daftar Sirkuit:</string>
