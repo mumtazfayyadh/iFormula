@@ -8,8 +8,10 @@ import com.mumtazfayyadh0102.iformula.ui.screen.AboutScreen
 import com.mumtazfayyadh0102.iformula.ui.screen.CalculateScreen
 import com.mumtazfayyadh0102.iformula.ui.screen.CircuitScreen
 import com.mumtazfayyadh0102.iformula.ui.screen.DriverScreen
+import com.mumtazfayyadh0102.iformula.ui.screen.FormScreen
 import com.mumtazfayyadh0102.iformula.ui.screen.GalleryScreen
 import com.mumtazfayyadh0102.iformula.ui.screen.HomeScreen
+import com.mumtazfayyadh0102.iformula.ui.screen.NotesScreen
 import com.mumtazfayyadh0102.iformula.ui.screen.WhatIsF1Screen
 
 @Composable
@@ -40,6 +42,16 @@ fun AppNavigation() {
         }
         composable(Screen.About.route) {
             AboutScreen(navController = navController)
+        }
+        composable(Screen.Notes.route) {
+            NotesScreen(navController = navController)
+        }
+        composable(Screen.Form.route) {
+            FormScreen(navController = navController, noteId = null) // untuk tambah
+        }
+        composable("formScreen/{id}") { backStackEntry ->
+            val id = backStackEntry.arguments?.getString("id")?.toIntOrNull()
+            FormScreen(navController = navController, noteId = id) // untuk edit
         }
     }
 }
