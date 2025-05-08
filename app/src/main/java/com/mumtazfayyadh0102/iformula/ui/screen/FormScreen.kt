@@ -210,4 +210,3 @@ fun FormScreen(navController: NavController, noteId: Int?) {
         }
     }
 }
-

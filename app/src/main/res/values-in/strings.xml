@@ -9,6 +9,8 @@
     <string name="gallery">Galeri</string>
     <string name="calculate">Kalkulasi</string>
     <string name="learn_more">Lebih Banyak</string>
+    <string name="notes">Catatan Balapan</string>
+    <string name="settings">Pengaturan</string>"
     <string name="about">Tentang Kami</string>
 
     1. F1 Screen
@@ -121,4 +123,21 @@
     <string name="all_rights_reserved">Semua Hak Dilindungi.</string>
     <string name="copyright_text">Hak Cipta (\c) 2025 Mumtaz Fayyadh</string>
     <string name="license_text">Redistribusi dan penggunaan dalam bentuk sumber dan biner, dengan atau tanpa modifikasi, diizinkan asalkan kondisi berikut terpenuhi.</string>
+
+    7. Form Screen
+    <string name="add">Tambah Catatan Balapan</string>
+    <string name="edit">Edit Catatan Balapan</string>
+    <string name="delete">Hapus Catatan Balapan</string>
+    <string name="notes_title">Catatan Balapan</string>
+    <string name="notes_empty">📝 Belum ada catatan.\nYuk tambah catatan hasil balapan!</string>
+    <string name="label_driver">Driver</string>
+    <string name="label_lap_time">Lap Time</string>
+    <string name="label_start_pos">Posisi Start</string>
+    <string name="label_points">Poin</string>
+    <string name="delete_title">Konfirmasi Hapus</string>
+    <string name="delete_message">Anda yakin ingin menghapus data ini?</string>
+    <string name="delete_confirm">Hapus</string>
+    <string name="delete_cancel">Batal</string>
+    <string name="form_required">Semua field wajib diisi</string>
+    <string name="form_save">Simpan</string>
 </resources>

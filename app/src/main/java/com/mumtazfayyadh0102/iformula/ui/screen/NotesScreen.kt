@@ -127,5 +127,3 @@ fun NotesScreen(navController: NavController) {
     }
 }
 
-
-
