@@ -196,6 +196,33 @@ fun HomeScreen(navController: NavController) {
                         .padding(start = 8.dp)
                 )
             }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                // Notes
+                MenuCard(
+                    icon = R.drawable.icon_notes,
+                    title = stringResource(id = R.string.notes),
+                    onClick = { navController.navigate(Screen.Notes.route) },
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(end = 8.dp)
+                )
+
+                //  Settings
+                MenuCard(
+                    icon = R.drawable.icon_settings,
+                    title = stringResource(id = R.string.settings),
+                    onClick = { navController.navigate(Screen.Home.route) },
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 8.dp)
+                )
+            }
         }
     }
 }
