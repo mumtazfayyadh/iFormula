@@ -216,7 +216,7 @@ fun HomeScreen(navController: NavController) {
                 //  Settings
                 MenuCard(
                     icon = R.drawable.icon_settings,
-                    title = stringResource(id = R.string.settings),
+                    title = stringResource(id = R.string.preference),
                     onClick = { navController.navigate(Screen.Home.route) },
                     modifier = Modifier
                         .weight(1f)

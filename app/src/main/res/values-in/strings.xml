@@ -10,7 +10,7 @@
     <string name="calculate">Kalkulasi</string>
     <string name="learn_more">Lebih Banyak</string>
     <string name="notes">Catatan Balapan</string>
-    <string name="settings">Pengaturan</string>"
+    <string name="preference">Preferensi</string>"
     <string name="about">Tentang Kami</string>
 
     1. F1 Screen
@@ -130,14 +130,21 @@
     <string name="delete">Hapus Catatan Balapan</string>
     <string name="notes_title">Catatan Balapan</string>
     <string name="notes_empty">📝 Belum ada catatan.\nYuk tambah catatan hasil balapan!</string>
-    <string name="label_driver">Driver</string>
+    <string name="label_driver">Pembalap</string>
     <string name="label_lap_time">Lap Time</string>
-    <string name="label_start_pos">Posisi Start</string>
+    <string name="label_finish_pos">Posisi Finish</string>
     <string name="label_points">Poin</string>
     <string name="delete_title">Konfirmasi Hapus</string>
     <string name="delete_message">Anda yakin ingin menghapus data ini?</string>
     <string name="delete_confirm">Hapus</string>
     <string name="delete_cancel">Batal</string>
-    <string name="form_required">Semua field wajib diisi</string>
+    <string name="form_required">Pastikan semua kolom terisi dengan benar</string>
     <string name="form_save">Simpan</string>
+    <string name="lap_time_hint">Teks berupa m.ss.sss (e.g. 1.42.123)</string>
+    <string name="error_lap_time">Format harus m.ss.SSS, contoh: 1.23.456</string>
+    <string name="start_pos_hint">1–20</string>
+    <string name="error_start_pos">1–20</string>
+    <string name="points_hint">0–25"</string>
+    <string name="error_points">0–25</string>
+
 </resources>

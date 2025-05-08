@@ -2,13 +2,28 @@ package com.mumtazfayyadh0102.iformula.ui.screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material3.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -37,11 +52,13 @@ fun NotesScreen(navController: NavController) {
     val appBarColor = if (isSystemInDarkTheme()) DarkF1Black else LightF1Red
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(onClick = {
+            FloatingActionButton(
+                containerColor = appBarColor,
+                onClick = {
                 // navigasi ke Form tanpa ID (tambah baru)
                 navController.navigate(Screen.Form.route)
             }) {
-                Text("+")
+                Icon(Icons.Default.Add, tint = Color.White, contentDescription = "Tambah")
             }
         },
         topBar = {
@@ -119,9 +136,9 @@ fun NotesScreen(navController: NavController) {
             .clickable { onClick() }
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text("${stringResource(R.string.label_driver)} ${note.driverName}", style = MaterialTheme.typography.titleMedium)
+            Text(note.driverName, style = MaterialTheme.typography.titleMedium)
             Text("${stringResource(R.string.label_lap_time)}: ${note.bestLapTime}")
-            Text("${stringResource(R.string.label_start_pos)}: ${note.startPosition}")
+            Text("${stringResource(R.string.label_finish_pos)}: ${note.startPosition}")
             Text("${stringResource(R.string.label_points)}: ${note.points}")
         }
     }
