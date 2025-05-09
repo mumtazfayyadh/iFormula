@@ -147,4 +147,11 @@
     <string name="points_hint">0–25"</string>
     <string name="error_points">0–25</string>
 
+    8. Preference Screen
+    <string name="choose_theme_color">Pilih Warna Tema</string>
+    <string name="color_red">Merah</string>
+    <string name="color_blue">Biru</string>
+    <string name="color_green">Hijau</string>
+    <string name="color_yellow">Kuning</string>
+    <string name="color_black">Hitam</string>
 </resources>

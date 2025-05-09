@@ -12,10 +12,12 @@ import com.mumtazfayyadh0102.iformula.ui.screen.FormScreen
 import com.mumtazfayyadh0102.iformula.ui.screen.GalleryScreen
 import com.mumtazfayyadh0102.iformula.ui.screen.HomeScreen
 import com.mumtazfayyadh0102.iformula.ui.screen.NotesScreen
+import com.mumtazfayyadh0102.iformula.ui.screen.PreferenceScreen
 import com.mumtazfayyadh0102.iformula.ui.screen.WhatIsF1Screen
+import com.mumtazfayyadh0102.iformula.viewmodel.ThemeViewModel
 
 @Composable
-fun AppNavigation() {
+fun AppNavigation(themeViewModel: ThemeViewModel) {
     val navController = rememberNavController()
 
     NavHost(
@@ -45,6 +47,9 @@ fun AppNavigation() {
         }
         composable(Screen.Notes.route) {
             NotesScreen(navController = navController)
+        }
+        composable(Screen.Preference.route) {
+            PreferenceScreen(navController = navController, themeViewModel = themeViewModel)
         }
         composable(Screen.Form.route) {
             FormScreen(navController = navController, noteId = null) // untuk tambah

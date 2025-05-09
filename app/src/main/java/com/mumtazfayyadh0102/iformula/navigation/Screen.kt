@@ -9,6 +9,7 @@ sealed class Screen(val route: String) {
     object Calculate : Screen("calculateScreen")
     object About : Screen("aboutScreen")
     object Notes : Screen("notesScreen")
+    object Preference : Screen("preferenceScreen")
     object Form : Screen("formScreen") {
         fun withId(id: Int) = "formScreen/$id"
     }

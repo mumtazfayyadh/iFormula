@@ -47,15 +47,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.mumtazfayyadh0102.iformula.R
 import com.mumtazfayyadh0102.iformula.navigation.Screen
-import com.mumtazfayyadh0102.iformula.ui.theme.DarkF1Black
-import com.mumtazfayyadh0102.iformula.ui.theme.LightF1Red
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavController) {
     // Deteksi mode tema
-    val appBarColor = if (isSystemInDarkTheme()) DarkF1Black else LightF1Red
-
+    val appBarColor = MaterialTheme.colorScheme.primary
     Scaffold(
         topBar = {
             Column {
@@ -217,7 +214,7 @@ fun HomeScreen(navController: NavController) {
                 MenuCard(
                     icon = R.drawable.icon_settings,
                     title = stringResource(id = R.string.preference),
-                    onClick = { navController.navigate(Screen.Home.route) },
+                    onClick = { navController.navigate(Screen.Preference.route) },
                     modifier = Modifier
                         .weight(1f)
                         .padding(start = 8.dp)
@@ -240,7 +237,9 @@ fun MenuCard(
             .aspectRatio(1f)
             .clickable { onClick() },
         shape = RoundedCornerShape(8.dp),
-        border = BorderStroke(1.dp, if (isSystemInDarkTheme()) Color.White else LightF1Red)
+        border = BorderStroke(
+            width = 1.dp,
+            color = if (MaterialTheme.colorScheme.primary == Color(0xFF121212)) Color.White else MaterialTheme.colorScheme.primary)
     ) {
         Column(
             modifier = Modifier

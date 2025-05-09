@@ -1,4 +1,4 @@
-package com.mumtazfayyadh0102.iformula.ui.screen
+package com.mumtazfayyadh0102.iformula.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

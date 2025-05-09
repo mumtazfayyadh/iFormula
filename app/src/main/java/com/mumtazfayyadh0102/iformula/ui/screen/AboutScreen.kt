@@ -43,13 +43,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.mumtazfayyadh0102.iformula.R
-import com.mumtazfayyadh0102.iformula.ui.theme.DarkF1Black
-import com.mumtazfayyadh0102.iformula.ui.theme.LightF1Red
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutScreen(navController: NavController) {
-    val appBarColor = if (isSystemInDarkTheme()) DarkF1Black else LightF1Red
+    val appBarColor = MaterialTheme.colorScheme.primary
     val context = LocalContext.current
 
     Scaffold(
@@ -141,7 +139,7 @@ fun AboutScreen(navController: NavController) {
                         context.startActivity(intent)
                     },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = if (isSystemInDarkTheme()) Color.Transparent else LightF1Red
+                        containerColor = MaterialTheme.colorScheme.primary
                     ),
                     border = BorderStroke(
                         width = 0.5.dp,

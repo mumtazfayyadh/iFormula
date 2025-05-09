@@ -1,7 +1,6 @@
 package com.mumtazfayyadh0102.iformula.ui.screen
 
 import android.widget.Toast
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,6 +18,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -40,9 +40,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.mumtazfayyadh0102.iformula.R
 import com.mumtazfayyadh0102.iformula.model.RaceNotes
-import com.mumtazfayyadh0102.iformula.ui.theme.DarkF1Black
-import com.mumtazfayyadh0102.iformula.ui.theme.LightF1Red
-import com.mumtazfayyadh0102.iformula.util.ViewModelFactory
+import com.mumtazfayyadh0102.iformula.viewmodel.RaceNotesViewModel
+import com.mumtazfayyadh0102.iformula.viewmodel.ViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,7 +50,13 @@ fun FormScreen(navController: NavController, noteId: Int?) {
     val context = LocalContext.current
     val viewModel: RaceNotesViewModel = viewModel(factory = ViewModelFactory(context))
 
-    val appBarColor = if (isSystemInDarkTheme()) DarkF1Black else LightF1Red
+    val appBarColor = MaterialTheme.colorScheme.primary
+    val borderColor = if (MaterialTheme.colorScheme.primary == Color(0xFF121212)) {
+        Color.White
+    } else {
+        MaterialTheme.colorScheme.primary
+    }
+
     var showDialog by rememberSaveable { mutableStateOf(false) }
 
     var driverName by rememberSaveable { mutableStateOf("") }
@@ -204,7 +209,12 @@ fun FormScreen(navController: NavController, noteId: Int?) {
             OutlinedTextField(
                 value = driverName,
                 onValueChange = { driverName = it },
-                label = { Text(stringResource(id = R.string.label_driver)) },
+                label = { Text(stringResource(id = R.string.label_driver), color = if (borderColor == Color.White) Color.White else Color.Gray) },
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = borderColor,
+                    unfocusedBorderColor = borderColor,
+                    disabledBorderColor = borderColor
+                ),
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -214,7 +224,7 @@ fun FormScreen(navController: NavController, noteId: Int?) {
                     lapTime = it
                     lapTimeError = false
                 },
-                label = { Text(stringResource(R.string.label_lap_time)) },
+                label = { Text(stringResource(R.string.label_lap_time), color = if (borderColor == Color.White) Color.White else Color.Gray) },
                 supportingText = {
                     if (lapTimeError) {
                         Text(
@@ -225,6 +235,11 @@ fun FormScreen(navController: NavController, noteId: Int?) {
                         Text(stringResource(R.string.lap_time_hint))
                     }
                 },
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = borderColor,
+                    unfocusedBorderColor = borderColor,
+                    disabledBorderColor = borderColor
+                ),
                 isError = lapTimeError,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.fillMaxWidth()
@@ -236,7 +251,7 @@ fun FormScreen(navController: NavController, noteId: Int?) {
                     startPos = it.filter { c -> c.isDigit() }
                     startPosError = false
                 },
-                label = { Text(stringResource(R.string.label_finish_pos)) },
+                label = { Text(stringResource(R.string.label_finish_pos), color = if (borderColor == Color.White) Color.White else Color.Gray) },
                 supportingText = {
                     if (startPosError) {
                         Text(stringResource(R.string.error_start_pos), color = MaterialTheme.colorScheme.error)
@@ -244,6 +259,11 @@ fun FormScreen(navController: NavController, noteId: Int?) {
                         Text(stringResource(R.string.start_pos_hint))
                     }
                 },
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = borderColor,
+                    unfocusedBorderColor = borderColor,
+                    disabledBorderColor = borderColor
+                ),
                 isError = startPosError,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.fillMaxWidth()
@@ -255,7 +275,7 @@ fun FormScreen(navController: NavController, noteId: Int?) {
                     points = it.filter { c -> c.isDigit() }
                     pointsError = false
                 },
-                label = { Text(stringResource(R.string.label_points)) },
+                label = { Text(stringResource(R.string.label_points), color = if (borderColor == Color.White) Color.White else Color.Gray) },
                 supportingText = {
                     if (pointsError) {
                         Text(stringResource(R.string.error_points), color = MaterialTheme.colorScheme.error)
@@ -263,6 +283,11 @@ fun FormScreen(navController: NavController, noteId: Int?) {
                         Text(stringResource(R.string.points_hint))
                     }
                 },
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = borderColor,
+                    unfocusedBorderColor = borderColor,
+                    disabledBorderColor = borderColor
+                ),
                 isError = pointsError,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.fillMaxWidth()

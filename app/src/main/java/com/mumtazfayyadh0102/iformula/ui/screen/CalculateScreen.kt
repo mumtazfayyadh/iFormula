@@ -55,15 +55,18 @@ import androidx.navigation.NavController
 import com.mumtazfayyadh0102.iformula.R
 import com.mumtazfayyadh0102.iformula.model.Circuit
 import com.mumtazfayyadh0102.iformula.navigation.Screen
-import com.mumtazfayyadh0102.iformula.ui.theme.DarkF1Black
-import com.mumtazfayyadh0102.iformula.ui.theme.LightF1Red
 import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CalculateScreen(navController: NavController) {
-    val appBarColor = if (isSystemInDarkTheme()) DarkF1Black else LightF1Red
+    val appBarColor = MaterialTheme.colorScheme.primary
     val context = LocalContext.current
+    val borderColor = if (MaterialTheme.colorScheme.primary == Color(0xFF121212)) {
+        Color.White
+    } else {
+        MaterialTheme.colorScheme.primary
+    }
 
     val circuits = listOf(
         Circuit("Monza", 5.793),
@@ -154,7 +157,7 @@ fun CalculateScreen(navController: NavController) {
                     value = circuits[selectedCircuitIndex].name,
                     onValueChange = {},
                     readOnly = true,
-                    label = { Text(stringResource(id = R.string.choose_circuit)) },
+                    label = { Text(stringResource(id = R.string.choose_circuit), color = if (borderColor == Color.White) Color.White else Color.Gray) },
                     trailingIcon = {
                         IconButton(onClick = { expanded = !expanded }) {
                             Icon(
@@ -164,8 +167,9 @@ fun CalculateScreen(navController: NavController) {
                         }
                     },
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = if (isSystemInDarkTheme()) Color.White else LightF1Red,
-                        unfocusedBorderColor = if (isSystemInDarkTheme()) Color.White else LightF1Red
+                        focusedBorderColor = borderColor,
+                        unfocusedBorderColor = borderColor,
+                        disabledBorderColor = borderColor
                     ),
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -196,7 +200,7 @@ fun CalculateScreen(navController: NavController) {
                     isError = false
                     calculationDone = false
                 },
-                label = { Text(stringResource(id = R.string.time_lap)) },
+                label = { Text(stringResource(id = R.string.time_lap), color = if (borderColor == Color.White) Color.White else Color.Gray) },
                 isError = isError,
                 supportingText = {
                     Column {
@@ -215,8 +219,9 @@ fun CalculateScreen(navController: NavController) {
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = if (isSystemInDarkTheme()) Color.White else LightF1Red,
-                    unfocusedBorderColor = if (isSystemInDarkTheme()) Color.White else LightF1Red
+                    focusedBorderColor = borderColor,
+                    unfocusedBorderColor = borderColor,
+                    disabledBorderColor = borderColor
                 ),
                 modifier = Modifier.fillMaxWidth()
             )

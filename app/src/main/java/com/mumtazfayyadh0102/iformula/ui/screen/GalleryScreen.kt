@@ -49,13 +49,11 @@ import androidx.navigation.NavController
 import com.mumtazfayyadh0102.iformula.R
 import com.mumtazfayyadh0102.iformula.model.GalleryImage
 import com.mumtazfayyadh0102.iformula.navigation.Screen
-import com.mumtazfayyadh0102.iformula.ui.theme.DarkF1Black
-import com.mumtazfayyadh0102.iformula.ui.theme.LightF1Red
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GalleryScreen(navController: NavController) {
-    val appBarColor = if (isSystemInDarkTheme()) DarkF1Black else LightF1Red
+    val appBarColor = MaterialTheme.colorScheme.primary
 
     val galleryImages = listOf(
         GalleryImage(

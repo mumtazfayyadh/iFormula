@@ -1,7 +1,6 @@
 package com.mumtazfayyadh0102.iformula.ui.screen
 
 import android.content.res.Configuration
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -35,13 +34,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.mumtazfayyadh0102.iformula.R
 import com.mumtazfayyadh0102.iformula.navigation.Screen
-import com.mumtazfayyadh0102.iformula.ui.theme.DarkF1Black
-import com.mumtazfayyadh0102.iformula.ui.theme.LightF1Red
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DriverScreen(navController: NavController) {
-    val appBarColor = if (isSystemInDarkTheme()) DarkF1Black else LightF1Red
+    val appBarColor = MaterialTheme.colorScheme.primary
 
     Scaffold(
         topBar = {
@@ -254,6 +251,7 @@ fun TeamSection(
         }
     }
 }
+
 @Preview(showBackground = true)
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
