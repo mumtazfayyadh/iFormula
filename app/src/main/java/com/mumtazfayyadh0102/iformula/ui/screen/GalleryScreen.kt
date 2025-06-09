@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -42,47 +46,26 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.mumtazfayyadh0102.iformula.R
-import com.mumtazfayyadh0102.iformula.model.GalleryImage
+import com.mumtazfayyadh0102.iformula.model.Gallery
 import com.mumtazfayyadh0102.iformula.navigation.Screen
+import com.mumtazfayyadh0102.iformula.network.GalleryApi
+import com.mumtazfayyadh0102.iformula.viewmodel.GalleryViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GalleryScreen(navController: NavController) {
     val appBarColor = MaterialTheme.colorScheme.primary
-
-    val galleryImages = listOf(
-        GalleryImage(
-            R.drawable.gallery1,
-            "Legend Mclaren"
-        ),
-        GalleryImage(
-            R.drawable.gallery2,
-            "Start Grid"
-        ),
-        GalleryImage(
-            R.drawable.gallery3,
-            "Ferrari"
-        ),
-        GalleryImage(
-            R.drawable.gallery4,
-            "Racing"
-        ),
-        GalleryImage(
-            R.drawable.gallery5,
-            "Wet Track"
-        ),
-        GalleryImage(
-            R.drawable.gallery6,
-            "Driver"
-        )
-    )
-
-    var currentImageIndex by rememberSaveable { mutableIntStateOf(0) }
 
     Scaffold(
         topBar = {
@@ -136,90 +119,53 @@ fun GalleryScreen(navController: NavController) {
                 style = MaterialTheme.typography.headlineMedium,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
+        }
+    }
+}
 
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(235.dp)
-                    .background(Color.LightGray)
-            ) {
-                Image(
-                    painter = painterResource(id = galleryImages[currentImageIndex].imageRes),
-                    contentDescription = galleryImages[currentImageIndex].description,
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
-                )
-            }
+@Composable
+fun ScreenContent(modifier: Modifier = Modifier) {
+    val viewModel: GalleryViewModel = viewModel()
+    val data by viewModel.data
 
-            Spacer(modifier = Modifier.height(16.dp))
+    LazyVerticalGrid(
+        modifier = modifier.fillMaxSize().padding(4.dp),
+        columns = GridCells.Fixed(2),
+    ) {
+        items(data) { ListItem(gallery = it) }
+    }
+}
 
-            // Deskripsi gambar
+@Composable
+fun ListItem(gallery: Gallery) {
+    Box (
+        modifier = Modifier.padding(4.dp).border(1.dp, Color.Gray),
+        contentAlignment = Alignment.BottomCenter
+    ) {
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(GalleryApi.getGalleryUrl(gallery.imageId))
+                .crossfade(true)
+                .build(),
+            contentDescription = stringResource(R.string.gallery_image, gallery.title)
+        )
+
+        Column (
+            modifier = Modifier.fillMaxWidth().padding(4.dp)
+                .background(Color(red = 0f, green = 0f, blue = 0f, alpha = 0.5f))
+                .padding(4.dp)
+        ) {
             Text(
-                text = galleryImages[currentImageIndex].description,
-                style = MaterialTheme.typography.bodyLarge,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 16.dp)
+                text = gallery.title,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
             )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // Tombol navigasi
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                // Tombol Previous
-                Button(
-                    onClick = {
-                        if (currentImageIndex > 0) {
-                            currentImageIndex--
-                        } else {
-                            // Kembali ke gambar terakhir jika di gambar pertama
-                            currentImageIndex = galleryImages.size - 1
-                        }
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = appBarColor,
-                        contentColor = Color.White
-                    ),
-                    border = BorderStroke(
-                        width = 0.5.dp,
-                        color = if (isSystemInDarkTheme()) Color.White else Color.Transparent
-                    ),
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text(stringResource(id = R.string.previous),
-                        color = Color.White,
-                    )
-                }
-
-                Spacer(modifier = Modifier.width(16.dp))
-
-                // Tombol Next
-                Button(
-                    onClick = {
-                        if (currentImageIndex < galleryImages.size - 1) {
-                            currentImageIndex++
-                        } else {
-                            // Kembali ke gambar pertama
-                            currentImageIndex = 0
-                        }
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = appBarColor,
-                        contentColor = Color.White
-                    ),
-                    border = BorderStroke(
-                        width = 0.5.dp,
-                        color = if (isSystemInDarkTheme()) Color.White else Color.Transparent
-                    ),
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text(stringResource(id = R.string.next),
-                        color = Color.White,
-                        )
-                }
-            }
+            Text(
+                text = gallery.description,
+                fontStyle = FontStyle.Italic,
+                fontSize = 14.sp,
+                color = Color.White
+            )
         }
     }
 }

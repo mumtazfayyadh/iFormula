@@ -71,9 +71,7 @@
     <string name="teams_conclusion">These teams compete in every race to accumulate points in the Constructors Championship, while the drivers battle for the Drivers Championship title!</string>
 
     3. Gallery Screen
-    <string name="previous">Previous</string>
-    <string name="next">Next</string>
-
+    <string name="gallery_image">Gallery %1$s</string>
     4. Calculate Screen
     <string name="calculate_description">Let\'s calculate what the average speed of the drivers is on the circuit, with lap times we can find out how fast the drivers are driving!</string>
     <string name="choose_circuit">Choose Circuit</string>

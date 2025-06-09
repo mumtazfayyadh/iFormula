@@ -72,8 +72,7 @@
     <string name="teams_conclusion">Tim-tim ini terus bersaing di setiap balapan untuk mengumpulkan poin dalam Kejuaraan Konstruktor, sementara para pembalap memperebutkan gelar Kejuaraan Pembalap!</string>
 
     3. Gallery Screen
-    <string name="previous">Sebelumnya</string>
-    <string name="next">Selanjutnya</string>
+    <string name="gallery_image">Galeri %1$s</string>
 
     4. Calculate Scren
     <string name="calculate_description">Mari kita hitung berapa kecepatan rata-rata pembalap di sirkuit, dengan waktu lap kita bisa mengetahui seberapa cepat para pembalap melaju!</string>
