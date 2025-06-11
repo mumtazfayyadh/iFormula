@@ -6,9 +6,9 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
-private const val BASE_URL = "https://raw.githubusercontent.com/" +
-        "indraazimi/mobpro1-compose/static-api/"
+private const val BASE_URL = "https://gallery-app.sendiko.my.id/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -20,8 +20,10 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface GalleryApiService {
-    @GET("static-api.json")
-    suspend fun getGallery(): List<Gallery>
+    @GET("photos")
+    suspend fun getGallery(
+        @Query("userId") userId: String = "null"
+    ): List<Gallery>
 }
 
 object GalleryApi {
@@ -29,7 +31,9 @@ object GalleryApi {
         retrofit.create(GalleryApiService::class.java)
     }
 
-    fun getGalleryUrl(imageId: String): String {
-        return "$BASE_URL$imageId.jpg"
+    fun getGalleryUrl(fullUrl: String): String {
+        return fullUrl
     }
 }
+
+enum class ApiStatus { LOADING, SUCCESS, FAILED }

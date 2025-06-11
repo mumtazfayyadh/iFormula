@@ -73,6 +73,8 @@
 
     3. Gallery Screen
     <string name="gallery_image">Galeri %1$s</string>
+    <string name="error_image">Gagal memuat data.. Koneksi error.</string>
+    <string name="try_again">Coba Lagi</string>
 
     4. Calculate Scren
     <string name="calculate_description">Mari kita hitung berapa kecepatan rata-rata pembalap di sirkuit, dengan waktu lap kita bisa mengetahui seberapa cepat para pembalap melaju!</string>

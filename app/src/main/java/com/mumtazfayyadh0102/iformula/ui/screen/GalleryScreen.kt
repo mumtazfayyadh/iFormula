@@ -1,13 +1,16 @@
 package com.mumtazfayyadh0102.iformula.ui.screen
 
 import android.content.res.Configuration
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,6 +28,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -35,6 +39,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -59,6 +64,7 @@ import coil.request.ImageRequest
 import com.mumtazfayyadh0102.iformula.R
 import com.mumtazfayyadh0102.iformula.model.Gallery
 import com.mumtazfayyadh0102.iformula.navigation.Screen
+import com.mumtazfayyadh0102.iformula.network.ApiStatus
 import com.mumtazfayyadh0102.iformula.network.GalleryApi
 import com.mumtazfayyadh0102.iformula.viewmodel.GalleryViewModel
 
@@ -108,18 +114,11 @@ fun GalleryScreen(navController: NavController) {
             }
         }
     ) { innerPadding ->
-        Column(
+        ScreenContent(
             modifier = Modifier
                 .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
-                .padding(16.dp)
-        ) {
-            Text(
-                text = stringResource(id = R.string.gallery),
-                style = MaterialTheme.typography.headlineMedium,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-        }
+                .padding(4.dp)
+        )
     }
 }
 
@@ -127,27 +126,63 @@ fun GalleryScreen(navController: NavController) {
 fun ScreenContent(modifier: Modifier = Modifier) {
     val viewModel: GalleryViewModel = viewModel()
     val data by viewModel.data
+    val status by viewModel.status.collectAsState()
 
-    LazyVerticalGrid(
-        modifier = modifier.fillMaxSize().padding(4.dp),
-        columns = GridCells.Fixed(2),
-    ) {
-        items(data) { ListItem(gallery = it) }
+    when (status) {
+        ApiStatus.LOADING -> {
+            Box (
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
+        }
+
+        ApiStatus.SUCCESS -> {
+            LazyVerticalGrid(
+                modifier = modifier.fillMaxSize().padding(4.dp),
+                columns = GridCells.Fixed(2),
+            ) {
+                items(data) { ListItem(gallery = it) }
+            }
+        }
+
+        ApiStatus.FAILED -> {
+            Column (
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+              Text(text = stringResource(id = R.string.error_image))
+              Button(
+                  onClick = { viewModel.retrieveData() },
+                  modifier = Modifier.padding(top = 16.dp),
+                  contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
+              ) {
+                  Text(text = stringResource(id = R.string.try_again))
+              }
+            }
+        }
     }
 }
 
 @Composable
 fun ListItem(gallery: Gallery) {
+    Log.d("GalleryDebug", "URL Gambar: ${gallery.imageUrl}")
     Box (
         modifier = Modifier.padding(4.dp).border(1.dp, Color.Gray),
         contentAlignment = Alignment.BottomCenter
     ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
-                .data(GalleryApi.getGalleryUrl(gallery.imageId))
+                .data(gallery.imageUrl)
                 .crossfade(true)
                 .build(),
-            contentDescription = stringResource(R.string.gallery_image, gallery.title)
+            contentDescription = stringResource(R.string.gallery_image, gallery.title),
+            contentScale = ContentScale.Crop,
+            placeholder = painterResource(id = R.drawable.loading_img),
+            error = painterResource(id = R.drawable.baseline_broken_image_24),
+            modifier = Modifier.fillMaxWidth().padding(4.dp)
         )
 
         Column (
