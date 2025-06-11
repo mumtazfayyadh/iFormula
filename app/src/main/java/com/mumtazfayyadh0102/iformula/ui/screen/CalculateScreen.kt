@@ -34,16 +34,19 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -54,7 +57,14 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.mumtazfayyadh0102.iformula.R
 import com.mumtazfayyadh0102.iformula.model.Circuit
+import com.mumtazfayyadh0102.iformula.model.User
 import com.mumtazfayyadh0102.iformula.navigation.Screen
+import com.mumtazfayyadh0102.iformula.network.UserDataStore
+import com.mumtazfayyadh0102.iformula.util.signIn
+import com.mumtazfayyadh0102.iformula.util.signOut
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -62,6 +72,12 @@ import java.util.Locale
 fun CalculateScreen(navController: NavController) {
     val appBarColor = MaterialTheme.colorScheme.primary
     val context = LocalContext.current
+    val dataStore = UserDataStore.getInstance(context)
+
+    val user by dataStore.userFlow.collectAsState(User())
+
+    var showDialog by remember { mutableStateOf(false) }
+
     val borderColor = if (MaterialTheme.colorScheme.primary == Color(0xFF121212)) {
         Color.White
     } else {
@@ -111,6 +127,20 @@ fun CalculateScreen(navController: NavController) {
                         }
                     },
                     actions = {
+                        IconButton(onClick = {
+                            if (user.email.isEmpty()) {
+                                CoroutineScope(Dispatchers.IO).launch { signIn(context, dataStore) }
+                            } else {
+                                showDialog = true
+                            }
+                        }) {
+                            Icon(
+                                painter = painterResource(R.drawable.baseline_account_circle_24),
+                                contentDescription = stringResource(R.string.profil),
+                                tint = Color.White
+                            )
+                        }
+
                         IconButton(onClick = { navController.navigate(Screen.About.route) }) {
                             Icon(
                                 imageVector = Icons.Filled.Info,
@@ -128,6 +158,15 @@ fun CalculateScreen(navController: NavController) {
             }
         }
     ) { innerPadding ->
+        if (showDialog) {
+            ProfileDialog(
+                user = user,
+                onDismissRequest = { showDialog = false }) {
+                CoroutineScope(Dispatchers.IO).launch { signOut(context, dataStore) }
+                showDialog = false
+            }
+        }
+
         Column(
             modifier = Modifier
                 .padding(innerPadding)

@@ -35,15 +35,26 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.mumtazfayyadh0102.iformula.R
+import com.mumtazfayyadh0102.iformula.model.User
 import com.mumtazfayyadh0102.iformula.navigation.Screen
+import com.mumtazfayyadh0102.iformula.network.UserDataStore
+import com.mumtazfayyadh0102.iformula.util.signIn
+import com.mumtazfayyadh0102.iformula.util.signOut
 import com.mumtazfayyadh0102.iformula.viewmodel.ThemeViewModel
-
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -53,6 +64,12 @@ fun PreferenceScreen(
     themeViewModel: ThemeViewModel
 ) {
     val selectedColor by themeViewModel.selectedColor.collectAsState()
+    val context = LocalContext.current
+    val dataStore = UserDataStore.getInstance(context)
+
+    val user by dataStore.userFlow.collectAsState(User())
+
+    var showDialog by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -78,6 +95,20 @@ fun PreferenceScreen(
                         }
                     },
                     actions = {
+                        IconButton(onClick = {
+                            if (user.email.isEmpty()) {
+                                CoroutineScope(Dispatchers.IO).launch { signIn(context, dataStore) }
+                            } else {
+                                showDialog = true
+                            }
+                        }) {
+                            Icon(
+                                painter = painterResource(R.drawable.baseline_account_circle_24),
+                                contentDescription = stringResource(R.string.profil),
+                                tint = Color.White
+                            )
+                        }
+
                         IconButton(onClick = { navController.navigate(Screen.About.route) }) {
                             Icon(
                                 imageVector = Icons.Filled.Info,
@@ -94,6 +125,15 @@ fun PreferenceScreen(
             }
         }
     ) { innerPadding ->
+        if (showDialog) {
+            ProfileDialog(
+                user = user,
+                onDismissRequest = { showDialog = false }) {
+                CoroutineScope(Dispatchers.IO).launch { signOut(context, dataStore) }
+                showDialog = false
+            }
+        }
+
         Column(
             modifier = Modifier
                 .padding(innerPadding)

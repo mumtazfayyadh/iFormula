@@ -29,8 +29,10 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -43,16 +45,28 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.mumtazfayyadh0102.iformula.R
 import com.mumtazfayyadh0102.iformula.model.RaceNotes
+import com.mumtazfayyadh0102.iformula.model.User
 import com.mumtazfayyadh0102.iformula.navigation.Screen
+import com.mumtazfayyadh0102.iformula.network.UserDataStore
 import com.mumtazfayyadh0102.iformula.util.SettingsDataStore
+import com.mumtazfayyadh0102.iformula.util.signIn
+import com.mumtazfayyadh0102.iformula.util.signOut
 import com.mumtazfayyadh0102.iformula.viewmodel.RaceNotesViewModel
 import com.mumtazfayyadh0102.iformula.viewmodel.ViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NotesScreen(navController: NavController) {
     val context = LocalContext.current
+    val dataStore = UserDataStore.getInstance(context)
+
+    val user by dataStore.userFlow.collectAsState(User())
+
+    var showDialog by remember { mutableStateOf(false) }
+
     val settings = remember { SettingsDataStore(context) }
     val isListLayout by settings.layoutFlow.collectAsState(initial = true)
     val scope = rememberCoroutineScope()
@@ -112,6 +126,21 @@ fun NotesScreen(navController: NavController) {
                                 tint = Color.White
                             )
                         }
+
+                        IconButton(onClick = {
+                            if (user.email.isEmpty()) {
+                                CoroutineScope(Dispatchers.IO).launch { signIn(context, dataStore) }
+                            } else {
+                                showDialog = true
+                            }
+                        }) {
+                            Icon(
+                                painter = painterResource(R.drawable.baseline_account_circle_24),
+                                contentDescription = stringResource(R.string.profil),
+                                tint = Color.White
+                            )
+                        }
+
                         IconButton(onClick = { navController.navigate(Screen.About.route) }) {
                             Icon(
                                 imageVector = Icons.Filled.Info,
@@ -128,6 +157,15 @@ fun NotesScreen(navController: NavController) {
             }
         }
     ) { padding ->
+        if (showDialog) {
+            ProfileDialog(
+                user = user,
+                onDismissRequest = { showDialog = false }) {
+                CoroutineScope(Dispatchers.IO).launch { signOut(context, dataStore) }
+                showDialog = false
+            }
+        }
+
         if (notes.value.isEmpty()) {
             // Jika kosong, tampilkan pesan
             Box(

@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 // Inisialisasi DataStore
-private val Context.dataStore by preferencesDataStore(name = "settings_preference")
+private val Context.dataStore by preferencesDataStore(name = "settings_config")
 
 class SettingsDataStore(private val context: Context) {
 

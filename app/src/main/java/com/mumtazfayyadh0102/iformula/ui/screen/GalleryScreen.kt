@@ -2,32 +2,22 @@ package com.mumtazfayyadh0102.iformula.ui.screen
 
 import android.content.res.Configuration
 import android.util.Log
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -41,8 +31,8 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,7 +43,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -63,15 +52,28 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.mumtazfayyadh0102.iformula.R
 import com.mumtazfayyadh0102.iformula.model.Gallery
+import com.mumtazfayyadh0102.iformula.model.User
 import com.mumtazfayyadh0102.iformula.navigation.Screen
 import com.mumtazfayyadh0102.iformula.network.ApiStatus
-import com.mumtazfayyadh0102.iformula.network.GalleryApi
+import com.mumtazfayyadh0102.iformula.network.UserDataStore
+import com.mumtazfayyadh0102.iformula.util.signIn
+import com.mumtazfayyadh0102.iformula.util.signOut
 import com.mumtazfayyadh0102.iformula.viewmodel.GalleryViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GalleryScreen(navController: NavController) {
     val appBarColor = MaterialTheme.colorScheme.primary
+    val context = LocalContext.current
+
+    val dataStore = UserDataStore.getInstance(context)
+
+    val user by dataStore.userFlow.collectAsState(User())
+
+    var showDialog by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -97,6 +99,20 @@ fun GalleryScreen(navController: NavController) {
                         titleContentColor = Color.White
                     ),
                     actions = {
+                        IconButton(onClick = {
+                            if (user.email.isEmpty()) {
+                                CoroutineScope(Dispatchers.IO).launch { signIn(context, dataStore) }
+                            } else {
+                                showDialog = true
+                            }
+                        }) {
+                            Icon(
+                                painter = painterResource(R.drawable.baseline_account_circle_24),
+                                contentDescription = stringResource(R.string.profil),
+                                tint = Color.White
+                            )
+                        }
+
                         IconButton(onClick = { navController.navigate(Screen.About.route) }) {
                             Icon(
                                 imageVector = Icons.Filled.Info,
@@ -119,6 +135,14 @@ fun GalleryScreen(navController: NavController) {
                 .padding(innerPadding)
                 .padding(4.dp)
         )
+        if (showDialog) {
+            ProfileDialog(
+                user = user,
+                onDismissRequest = { showDialog = false }) {
+                CoroutineScope(Dispatchers.IO).launch { signOut(context, dataStore) }
+                showDialog = false
+            }
+        }
     }
 }
 
