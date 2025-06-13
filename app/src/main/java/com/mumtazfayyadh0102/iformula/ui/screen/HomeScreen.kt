@@ -46,9 +46,11 @@ package com.mumtazfayyadh0102.iformula.ui.screen
  import androidx.compose.ui.platform.LocalContext
  import androidx.compose.ui.res.painterResource
  import androidx.compose.ui.res.stringResource
+ import androidx.compose.ui.text.font.FontWeight
  import androidx.compose.ui.text.style.TextAlign
  import androidx.compose.ui.tooling.preview.Preview
  import androidx.compose.ui.unit.dp
+ import androidx.compose.ui.unit.sp
  import androidx.navigation.NavController
  import com.mumtazfayyadh0102.iformula.R
  import com.mumtazfayyadh0102.iformula.model.User
@@ -63,7 +65,7 @@ package com.mumtazfayyadh0102.iformula.ui.screen
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavController) {
-    // Deteksi mode tema
+
     val appBarColor = MaterialTheme.colorScheme.primary
     val context = LocalContext.current
     val dataStore = UserDataStore.getInstance(context)
@@ -136,7 +138,7 @@ fun HomeScreen(navController: NavController) {
             // Welcoming
             Text(
                 text = stringResource(id = R.string.welcome_title),
-                style = MaterialTheme.typography.headlineMedium,
+                fontSize = 28.sp,
             )
 
             Text(
@@ -146,10 +148,17 @@ fun HomeScreen(navController: NavController) {
                 modifier = Modifier.padding(vertical = 8.dp)
             )
 
+            Text(
+                text = stringResource(id = R.string.subwelcome_text),
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Justify,
+                modifier = Modifier.padding(vertical = 8.dp)
+            )
+
             // About F1
             Text(
                 text = stringResource(id = R.string.what_is_f1),
-                style = MaterialTheme.typography.headlineMedium,
+                fontSize = 28.sp,
                 modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)
             )
 
@@ -301,7 +310,8 @@ fun MenuCard(
             Text(
                 text = title,
                 textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.titleMedium
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold
             )
         }
     }

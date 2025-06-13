@@ -6,11 +6,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -25,6 +28,12 @@ fun DetailDialog(
     description: String,
     onDismissRequest: () -> Unit
 ) {
+    val borderColor = if (MaterialTheme.colorScheme.primary == Color(0xFF121212)) {
+        Color.White
+    } else {
+        MaterialTheme.colorScheme.primary
+    }
+
     AlertDialog(
         onDismissRequest = onDismissRequest,
         title = null,
@@ -44,23 +53,33 @@ fun DetailDialog(
                 OutlinedTextField(
                     value = title,
                     onValueChange = {},
-                    label = { Text(stringResource(R.string.title)) },
+                    label = { Text(stringResource(R.string.title), color = if (borderColor == Color.White) Color.White else Color.Gray) },
                     readOnly = true,
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = borderColor,
+                        unfocusedBorderColor = borderColor,
+                        disabledBorderColor = borderColor
+                    ),
                     modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
                 )
 
                 OutlinedTextField(
                     value = description,
                     onValueChange = {},
-                    label = { Text(stringResource(R.string.description)) },
+                    label = { Text(stringResource(R.string.description), color = if (borderColor == Color.White) Color.White else Color.Gray)  },
                     readOnly = true,
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = borderColor,
+                        unfocusedBorderColor = borderColor,
+                        disabledBorderColor = borderColor
+                    ),
                     modifier = Modifier.fillMaxWidth().height(100.dp).padding(top = 8.dp)
                 )
             }
         },
         confirmButton = {
             TextButton(onClick = onDismissRequest) {
-                Text(stringResource(R.string.close))
+                Text(stringResource(R.string.close), color = Color.Red)
             }
         },
         dismissButton = {}

@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">iFormula</string>
     <string name="welcome_title">Welcome To iFormula!</string>
-    <string name="welcome_text">There\'s a point at 7,000 RPMs where everything fades. The machine becomes weightless. It disappears. All that\'s left, a body moving through space, and time. At 7,000 RPM, that\'s where you meet it. That\'s where it waits for you. \nWelcome, speed enthusiast!</string>
+    <string name="welcome_text">There\'s a point at 7,000 RPMs where everything fades. The machine becomes weightless. It disappears. All that\'s left, a body moving through space, and time. At 7,000 RPM, that\'s where you meet it. That\'s where it waits for you.</string>
+    <string name="subwelcome_text">Welcome, speed enthusiast!</string>
     <string name="what_is_f1">What is F1?</string>
     <string name="drivers_teams">Driver &amp; Teams</string>
     <string name="circuit_schedule">Circuit &amp; Schedule</string>
@@ -132,7 +133,7 @@
     <string name="trakteer_kopi">Buy me a coffee</string>
     <string name="all_rights_reserved">All Rights Reserved.</string>
     <string name="copyright_text">Copyright (\c) 2025 Mumtaz Fayyadh</string>
-    <string name="license_text">Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following condition are met.</string>
+    <string name="license_text">Redistribution and use in source and binary forms, with or without modification, are permitted provided that the condition are met.</string>
 
     7. Notes w/ Form Screen
     <string name="add">Add Race Notes</string>

@@ -35,11 +35,11 @@ class GalleryViewModel : ViewModel() {
                 val response = GalleryApi.service.getGallery(userId)
                 dataGallery.value = response.photos
                 status.value = ApiStatus.SUCCESS
-                Log.d("GalleryViewModel", "✅ retrieveData success, size: ${response.photos.size}")
+                Log.d("GalleryViewModel", "retrieveData success, size: ${response.photos.size}")
             } catch (e: Exception) {
                 errorMessage.value = "Failure: ${e.message}"
                 status.value = ApiStatus.FAILED
-                Log.e("GalleryViewModel", "❌ retrieveData error: ${e.message}")
+                Log.e("GalleryViewModel", "retrieveData error: ${e.message}")
             }
         }
     }

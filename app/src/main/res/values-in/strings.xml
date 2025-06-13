@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">iFormula</string>
     <string name="welcome_title">Selamat datang di iFormula!</string>
-    <string name="welcome_text">Ada satu titik pada 7.000 RPM di mana segalanya memudar. Mesin seolah kehilangan beratnya. Ia menghilang. Yang tersisa hanyalah tubuh yang bergerak menembus ruang dan waktu. Pada 7.000 RPM, di situlah kamu menemuinya. Di situlah ia menunggumu. \nSelamat datang, para entusias kecepatan!</string>
+    <string name="welcome_text">Ada satu titik pada 7.000 RPM di mana segalanya memudar. Mesin seolah kehilangan beratnya. Ia menghilang. Yang tersisa hanyalah tubuh yang bergerak menembus ruang dan waktu. Pada 7.000 RPM, di situlah kamu menemuinya. Di situlah ia menunggumu.</string>
+    <string name="subwelcome_text">Selamat datang, para antusias kecepatan!</string>
     <string name="what_is_f1">Apa itu F1?</string>
     <string name="drivers_teams">Pembalap &amp; Tim</string>
     <string name="circuit_schedule">Sirkuit &amp; Jadwal</string>
@@ -133,7 +134,7 @@
     <string name="trakteer_kopi">Trakteer kopi ke developer</string>
     <string name="all_rights_reserved">Semua Hak Dilindungi.</string>
     <string name="copyright_text">Hak Cipta (\c) 2025 Mumtaz Fayyadh</string>
-    <string name="license_text">Redistribusi dan penggunaan dalam bentuk sumber dan biner, dengan atau tanpa modifikasi, diizinkan asalkan kondisi berikut terpenuhi.</string>
+    <string name="license_text">Redistribusi dan penggunaan dalam bentuk sumber dan biner, dengan atau tanpa modifikasi, diizinkan asalkan kondisi terpenuhi.</string>
 
     7. Form Screen
     <string name="add">Tambah Catatan Balapan</string>

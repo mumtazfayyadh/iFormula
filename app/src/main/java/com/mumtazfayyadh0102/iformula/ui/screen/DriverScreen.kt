@@ -37,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.mumtazfayyadh0102.iformula.R
 import com.mumtazfayyadh0102.iformula.model.User
@@ -130,7 +131,7 @@ fun DriverScreen(navController: NavController) {
         ) {
             Text(
                 text = stringResource(id = R.string.meet_teams_drivers),
-                style = MaterialTheme.typography.headlineMedium,
+                fontSize = 28.sp,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
@@ -256,7 +257,7 @@ fun TeamSection(
             )
             Text(
                 text = teamName,
-                style = MaterialTheme.typography.titleMedium,
+                fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
             )
         }

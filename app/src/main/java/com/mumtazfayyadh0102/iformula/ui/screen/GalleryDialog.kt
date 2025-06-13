@@ -13,8 +13,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -23,8 +25,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -39,6 +41,12 @@ fun GalleryDialog(
     onDismissRequest: () -> Unit,
     onConfirmation: (String, String) -> Unit
 ) {
+
+    val borderColor = if (MaterialTheme.colorScheme.primary == Color(0xFF121212)) {
+        Color.White
+    } else {
+        MaterialTheme.colorScheme.primary
+    }
 
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
@@ -60,22 +68,32 @@ fun GalleryDialog(
                 OutlinedTextField(
                     value = title,
                     onValueChange = { title = it },
-                    label = { Text(text = stringResource(id = R.string.title)) },
+                    label = { Text(text = stringResource(id = R.string.title), color = if (borderColor == Color.White) Color.White else Color.Gray) },
                     maxLines = 1,
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Words,
                         imeAction = ImeAction.Next
+                    ),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = borderColor,
+                        unfocusedBorderColor = borderColor,
+                        disabledBorderColor = borderColor
                     ),
                     modifier = Modifier.padding(top = 8.dp)
                 )
                 OutlinedTextField(
                     value = description,
                     onValueChange = { description = it },
-                    label = { Text(text = stringResource(id = R.string.description)) },
+                    label = { Text(text = stringResource(id = R.string.description), color = if (borderColor == Color.White) Color.White else Color.Gray) },
                     maxLines = 2,
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
                         imeAction = ImeAction.Done
+                    ),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = borderColor,
+                        unfocusedBorderColor = borderColor,
+                        disabledBorderColor = borderColor
                     ),
                     modifier = Modifier.fillMaxWidth().height(100.dp))
                 Row(
@@ -84,9 +102,9 @@ fun GalleryDialog(
                 ) {
                     OutlinedButton(
                         onClick = { onDismissRequest() },
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     ) {
-                        Text(text = stringResource(R.string.cancel))
+                        Text(text = stringResource(R.string.cancel), color = Color.hsl(hue = 207f, saturation = 0.64f, lightness = 0.59f))
                     }
 
                     OutlinedButton(
@@ -94,7 +112,7 @@ fun GalleryDialog(
                         enabled = title.isNotEmpty() && description.isNotEmpty(),
                         modifier = Modifier.padding(8.dp)
                     ) {
-                        Text(text = stringResource(R.string.save))
+                        Text(text = stringResource(R.string.save), color = Color.hsl(hue = 207f, saturation = 0.64f, lightness = 0.59f))
                     }
                 }
 

@@ -175,7 +175,7 @@ fun CalculateScreen(navController: NavController) {
         ) {
             Text(
                 text = stringResource(id = R.string.calculate),
-                style = MaterialTheme.typography.headlineMedium,
+                fontSize = 28.sp,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 

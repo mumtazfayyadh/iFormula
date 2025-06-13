@@ -34,6 +34,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.mumtazfayyadh0102.iformula.R
 import com.mumtazfayyadh0102.iformula.model.User
@@ -155,7 +156,7 @@ fun CircuitScreen(navController: NavController) {
         ) {
             Text(
                 text = stringResource(id = R.string.circuit_schedule),
-                style = MaterialTheme.typography.headlineMedium
+                fontSize = 28.sp
             )
 
             Image(
@@ -166,7 +167,7 @@ fun CircuitScreen(navController: NavController) {
 
             Text(
                 text = stringResource(id = R.string.circuit_list_title),
-                style = MaterialTheme.typography.headlineMedium,
+                fontSize = 28.sp,
                 modifier = Modifier.padding(vertical = 16.dp)
             )
 

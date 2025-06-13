@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -18,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -33,6 +35,13 @@ fun EditDialog(
     onDismissRequest: () -> Unit,
     onUpdate: (String, String) -> Unit
 ) {
+
+    val borderColor = if (MaterialTheme.colorScheme.primary == Color(0xFF121212)) {
+        Color.White
+    } else {
+        MaterialTheme.colorScheme.primary
+    }
+
     var title by remember { mutableStateOf(titleInit) }
     var description by remember { mutableStateOf(descriptionInit) }
 
@@ -63,7 +72,12 @@ fun EditDialog(
                 OutlinedTextField(
                     value = title,
                     onValueChange = { title = it },
-                    label = { Text(text = stringResource(R.string.title)) },
+                    label = { Text(text = stringResource(R.string.title), color = if (borderColor == Color.White) Color.White else Color.Gray) },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = borderColor,
+                        unfocusedBorderColor = borderColor,
+                        disabledBorderColor = borderColor
+                    ),
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -72,7 +86,12 @@ fun EditDialog(
                 OutlinedTextField(
                     value = description,
                     onValueChange = { description = it },
-                    label = { Text(text = stringResource(R.string.description)) },
+                    label = { Text(text = stringResource(R.string.description), color = if (borderColor == Color.White) Color.White else Color.Gray) },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = borderColor,
+                        unfocusedBorderColor = borderColor,
+                        disabledBorderColor = borderColor
+                    ),
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(100.dp)
@@ -85,8 +104,7 @@ fun EditDialog(
                 onDismissRequest()
             }) {
                 Text(
-                    text = stringResource(R.string.update_confirm),
-                    color = MaterialTheme.colorScheme.primary
+                    text = stringResource(R.string.update_confirm), color = Color.hsl(hue = 207f, saturation = 0.64f, lightness = 0.59f)
                 )
             }
         },
