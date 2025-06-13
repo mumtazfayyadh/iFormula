@@ -31,15 +31,12 @@ class GalleryViewModel : ViewModel() {
     fun retrieveData(userId: String = "null") {
         viewModelScope.launch(Dispatchers.IO) {
             status.value = ApiStatus.LOADING
-            Log.d("GalleryViewModel", "📤 Mengambil data gallery untuk userId: $userId")
             try {
                 val response = GalleryApi.service.getGallery(userId)
                 data.value = response.photos
                 status.value = ApiStatus.SUCCESS
-                Log.d("GalleryViewModel", "✅ Jumlah data diterima: ${response.photos.size}")
             } catch (e: Exception) {
-                Log.e("GalleryViewModel", "❌ Gagal ambil data: ${e.message}")
-                errorMessage.value = "Gagal mengambil data: ${e.message}"
+                errorMessage.value = "Failure: ${e.message}"
                 status.value = ApiStatus.FAILED
             }
         }
@@ -48,25 +45,21 @@ class GalleryViewModel : ViewModel() {
     fun saveData(userId: String, title: String, description: String, bitmap: Bitmap) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                Log.d("GalleryViewModel", "📤 Mengirim data: userId=$userId, title=$title")
                 val result = GalleryApi.service.postGallery(
                     userId.toRequestBody("text/plain".toMediaTypeOrNull()),
                     title.toRequestBody("text/plain".toMediaTypeOrNull()),
                     description.toRequestBody("text/plain".toMediaTypeOrNull()),
                     bitmap.toMultipartBody()
                 )
-
                 if (result.status == "success") {
-                    Log.d("GalleryViewModel", "Data berhasil disimpan, refresh data")
                     retrieveData(userId)
                 } else {
-                    Log.e("GalleryViewModel", " Gagal simpan data: ${result.message}")
                     throw Exception(result.message)
                 }
 
             } catch (e: Exception) {
-                Log.e("GalleryViewModel", " Exception saat simpan data: ${e.message}")
-                errorMessage.value = "Error: ${e.message}"
+                Log.e("GalleryViewModel", " Exception: ${e.message}")
+                errorMessage.value = "${e.message}"
             }
         }
     }
@@ -74,45 +67,39 @@ class GalleryViewModel : ViewModel() {
     fun updateData(id: Int, userId: String, title: String, description: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                Log.d("GalleryViewModel", "📤 Mengupdate data: id=$id, userId=$userId")
                 val result = GalleryApi.service.updateGallery(
                     id,
                     userId.toRequestBody("text/plain".toMediaTypeOrNull()),
                     title.toRequestBody("text/plain".toMediaTypeOrNull()),
                     description.toRequestBody("text/plain".toMediaTypeOrNull())
                 )
-
                 if (result.status == "success") {
-                    Log.d("GalleryViewModel", "✅ Berhasil update data")
                     retrieveData(userId)
                 } else {
                     throw Exception(result.message)
                 }
             } catch (e: Exception) {
-                Log.e("GalleryViewModel", "❌ Gagal update: ${e.message}")
-                errorMessage.value = "Error: ${e.message}"
+                Log.e("GalleryViewModel", "Exception: ${e.message}")
+                errorMessage.value = "${e.message}"
             }
         }
     }
-
-
 
     fun deleteItem(id: Int, userId: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val result = GalleryApi.service.deleteGallery(id)
                 if (result.status == "success") {
-                    Log.d("GalleryViewModel", "✅ Item $id berhasil dihapus")
                     delay(300)
                     retrieveData(userId)
                 } else {
-                    Log.e("GalleryViewModel", "❌ Gagal hapus item $id: ${result.message}")
+                    Log.e("GalleryViewModel", "$id: ${result.message}")
                     throw Exception(result.message)
                 }
             } catch (e: Exception) {
                 val message = e.message ?: "Unknown error"
-                Log.e("GalleryViewModel", "❌ Exception delete: $message")
-                errorMessage.value = "Gagal hapus data: $message"
+                Log.e("GalleryViewModel", "Exception: $message")
+                errorMessage.value = "${e.message}"
             }
         }
     }
@@ -122,12 +109,13 @@ class GalleryViewModel : ViewModel() {
             try {
                 val result = GalleryApi.service.deleteGallery(id)
                 if (result.status == "success") {
-                    retrieveData() // atau dengan userId kalau perlu
+                    retrieveData()
                 } else {
-                    Log.e("GalleryViewModel", "Gagal hapus: ${result.message}")
+                    Log.e("GalleryViewModel", "Failure: ${result.message}")
                 }
             } catch (e: Exception) {
-                Log.e("GalleryViewModel", "Exception hapus data: ${e.message}")
+                Log.e("GalleryViewModel", "Exception: ${e.message}")
+                errorMessage.value = "${e.message}"
             }
         }
     }

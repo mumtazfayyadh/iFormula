@@ -62,10 +62,6 @@ object GalleryApi {
     val service: GalleryApiService by lazy {
         retrofit.create(GalleryApiService::class.java)
     }
-
-    fun getGalleryUrl(fullUrl: String): String {
-        return fullUrl
-    }
 }
 
 enum class ApiStatus { LOADING, SUCCESS, FAILED }

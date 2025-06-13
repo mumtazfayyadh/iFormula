@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -58,7 +59,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
@@ -99,10 +99,11 @@ fun GalleryScreen(navController: NavController) {
     var showEditDialog by remember { mutableStateOf(false) }
     var itemToEdit by remember { mutableStateOf<Gallery?>(null) }
 
-
     var showDeleteDialog by remember { mutableStateOf(false) }
     var itemToDelete by remember { mutableStateOf<Gallery?>(null) }
 
+    var showDetailDialog by remember { mutableStateOf(false) }
+    var selectedGallery by remember { mutableStateOf<Gallery?>(null) }
 
     var bitmap: Bitmap? by remember { mutableStateOf(null) }
     var launcher = rememberLauncherForActivityResult(CropImageContract()) {
@@ -191,7 +192,11 @@ fun GalleryScreen(navController: NavController) {
             onEdit = { gallery ->
                 itemToEdit = gallery
                 showEditDialog = true
-                }
+            },
+            onDetail = { gallery ->
+                selectedGallery = gallery
+                showDetailDialog = true
+            }
         )
         if (showDialog) {
             ProfileDialog(
@@ -209,6 +214,15 @@ fun GalleryScreen(navController: NavController) {
                 viewModel.saveData(user.email, title, description, bitmap!!)
                 showGalleryDialog = false
             }
+        }
+
+        if (showDetailDialog && selectedGallery != null) {
+            DetailDialog(
+                imageUrl = selectedGallery!!.imageUrl,
+                title = selectedGallery!!.title,
+                description = selectedGallery!!.description,
+                onDismissRequest = { showDetailDialog = false }
+            )
         }
 
         if (showEditDialog && itemToEdit != null) {
@@ -250,10 +264,14 @@ fun ScreenContent(
     viewModel: GalleryViewModel,
     userId: String,
     modifier: Modifier = Modifier,
-    onEdit: (Gallery) -> Unit
+    onEdit: (Gallery) -> Unit,
+    onDetail: (Gallery) -> Unit
 ) {
     val data by viewModel.data
     val status by viewModel.status.collectAsState()
+
+    var selectedGallery by remember { mutableStateOf<Gallery?>(null) }
+    var showDetailDialog by remember { mutableStateOf(false) }
 
     var showDeleteDialog by remember { mutableStateOf(false) }
     var itemToDelete by remember { mutableStateOf<Gallery?>(null) }
@@ -285,6 +303,7 @@ fun ScreenContent(
                             itemToDelete = gallery
                             showDeleteDialog = true
                         },
+                        onClick = { onDetail(gallery) },
                         onEditClick = { onEdit(gallery) },
                         showDelete = userId.isNotEmpty() && userId != "null",
                         showEdit = userId.isNotEmpty() && userId != "null"
@@ -329,10 +348,11 @@ fun ListItem(
     onEditClick: () -> Unit,
     showEdit: Boolean = true,
     onDeleteClick: () -> Unit,
-    showDelete: Boolean = true
+    showDelete: Boolean = true,
+    onClick: () -> Unit
 ) {
     Box(
-        modifier = Modifier.padding(4.dp).border(1.dp, Color.Gray),
+        modifier = Modifier.padding(4.dp).clickable { onClick() }.border(1.dp, Color.Gray),
         contentAlignment = Alignment.BottomCenter
     ) {
         AsyncImage(
