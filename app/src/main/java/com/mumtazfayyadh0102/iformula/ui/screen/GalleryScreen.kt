@@ -43,7 +43,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -106,7 +105,7 @@ fun GalleryScreen(navController: NavController) {
     var selectedGallery by remember { mutableStateOf<Gallery?>(null) }
 
     var bitmap: Bitmap? by remember { mutableStateOf(null) }
-    var launcher = rememberLauncherForActivityResult(CropImageContract()) {
+    val launcher = rememberLauncherForActivityResult(CropImageContract()) {
         bitmap = getCroppedImage(context.contentResolver, it)
         if (bitmap != null) showGalleryDialog = true
     }
@@ -267,18 +266,14 @@ fun ScreenContent(
     onEdit: (Gallery) -> Unit,
     onDetail: (Gallery) -> Unit
 ) {
-    val data by viewModel.data
+    val data by viewModel.data.collectAsState()
     val status by viewModel.status.collectAsState()
-
-    var selectedGallery by remember { mutableStateOf<Gallery?>(null) }
-    var showDetailDialog by remember { mutableStateOf(false) }
 
     var showDeleteDialog by remember { mutableStateOf(false) }
     var itemToDelete by remember { mutableStateOf<Gallery?>(null) }
 
-    LaunchedEffect(userId) {
-        viewModel.retrieveData(userId)
-    }
+    viewModel.retrieveData(userId)
+
 
     when (status) {
         ApiStatus.LOADING -> {
@@ -334,7 +329,8 @@ fun ScreenContent(
         DeleteDialog(
             onDismissRequest = { showDeleteDialog = false },
             onConfirmation = {
-                viewModel.deleteData(itemToDelete!!.id)
+                viewModel.deleteItem(itemToDelete!!.id, userId)
+
                 showDeleteDialog = false
             }
         )

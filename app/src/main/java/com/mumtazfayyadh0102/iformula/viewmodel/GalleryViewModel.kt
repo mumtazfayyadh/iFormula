@@ -9,8 +9,8 @@ import com.mumtazfayyadh0102.iformula.model.Gallery
 import com.mumtazfayyadh0102.iformula.network.ApiStatus
 import com.mumtazfayyadh0102.iformula.network.GalleryApi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -19,8 +19,8 @@ import java.io.ByteArrayOutputStream
 
 class GalleryViewModel : ViewModel() {
 
-    var data = mutableStateOf(emptyList<Gallery>())
-        private set
+    private val dataGallery = MutableStateFlow<List<Gallery>>(emptyList())
+    val data: StateFlow<List<Gallery>> get() = dataGallery
 
     var status = MutableStateFlow(ApiStatus.LOADING)
         private set
@@ -30,14 +30,16 @@ class GalleryViewModel : ViewModel() {
 
     fun retrieveData(userId: String = "null") {
         viewModelScope.launch(Dispatchers.IO) {
-            status.value = ApiStatus.LOADING
             try {
+                status.value = ApiStatus.LOADING
                 val response = GalleryApi.service.getGallery(userId)
-                data.value = response.photos
+                dataGallery.value = response.photos
                 status.value = ApiStatus.SUCCESS
+                Log.d("GalleryViewModel", "✅ retrieveData success, size: ${response.photos.size}")
             } catch (e: Exception) {
                 errorMessage.value = "Failure: ${e.message}"
                 status.value = ApiStatus.FAILED
+                Log.e("GalleryViewModel", "❌ retrieveData error: ${e.message}")
             }
         }
     }
@@ -52,14 +54,12 @@ class GalleryViewModel : ViewModel() {
                     bitmap.toMultipartBody()
                 )
                 if (result.status == "success") {
-                    retrieveData(userId)
+                    retrieveData()
                 } else {
                     throw Exception(result.message)
                 }
-
             } catch (e: Exception) {
-                Log.e("GalleryViewModel", " Exception: ${e.message}")
-                errorMessage.value = "${e.message}"
+                errorMessage.value = e.message
             }
         }
     }
@@ -74,13 +74,12 @@ class GalleryViewModel : ViewModel() {
                     description.toRequestBody("text/plain".toMediaTypeOrNull())
                 )
                 if (result.status == "success") {
-                    retrieveData(userId)
+                    retrieveData()
                 } else {
                     throw Exception(result.message)
                 }
             } catch (e: Exception) {
-                Log.e("GalleryViewModel", "Exception: ${e.message}")
-                errorMessage.value = "${e.message}"
+                errorMessage.value = e.message
             }
         }
     }
@@ -90,50 +89,26 @@ class GalleryViewModel : ViewModel() {
             try {
                 val result = GalleryApi.service.deleteGallery(id)
                 if (result.status == "success") {
-                    delay(300)
-                    retrieveData(userId)
+                    retrieveData()
                 } else {
-                    Log.e("GalleryViewModel", "$id: ${result.message}")
                     throw Exception(result.message)
                 }
             } catch (e: Exception) {
-                val message = e.message ?: "Unknown error"
-                Log.e("GalleryViewModel", "Exception: $message")
-                errorMessage.value = "${e.message}"
+                errorMessage.value = e.message
             }
         }
     }
-
-    fun deleteData(id: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val result = GalleryApi.service.deleteGallery(id)
-                if (result.status == "success") {
-                    retrieveData()
-                } else {
-                    Log.e("GalleryViewModel", "Failure: ${result.message}")
-                }
-            } catch (e: Exception) {
-                Log.e("GalleryViewModel", "Exception: ${e.message}")
-                errorMessage.value = "${e.message}"
-            }
-        }
-    }
-
 
     private fun Bitmap.toMultipartBody(): MultipartBody.Part {
         val stream = ByteArrayOutputStream()
         compress(Bitmap.CompressFormat.JPEG, 80, stream)
         val byteArray = stream.toByteArray()
-        val requestBody = byteArray.toRequestBody(
-            "image/jpeg".toMediaTypeOrNull(), 0, byteArray.size
-        )
-        return MultipartBody.Part.createFormData(
-            "image", "image.jpg", requestBody
-        )
+        val requestBody = byteArray.toRequestBody("image/jpeg".toMediaTypeOrNull())
+        return MultipartBody.Part.createFormData("image", "image.jpg", requestBody)
     }
 
     fun clearMessage() {
         errorMessage.value = null
     }
 }
+
