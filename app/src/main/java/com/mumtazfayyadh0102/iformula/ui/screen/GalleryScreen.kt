@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -26,6 +27,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -56,6 +58,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
@@ -92,6 +95,10 @@ fun GalleryScreen(navController: NavController) {
 
     var showDialog by remember { mutableStateOf(false) }
     var showGalleryDialog by remember { mutableStateOf(false) }
+
+    var showEditDialog by remember { mutableStateOf(false) }
+    var itemToEdit by remember { mutableStateOf<Gallery?>(null) }
+
 
     var showDeleteDialog by remember { mutableStateOf(false) }
     var itemToDelete by remember { mutableStateOf<Gallery?>(null) }
@@ -177,7 +184,15 @@ fun GalleryScreen(navController: NavController) {
             }
         }
     ) { innerPadding ->
-        ScreenContent(viewModel, user.email, modifier = Modifier.padding(innerPadding).padding(4.dp))
+        ScreenContent(
+            viewModel,
+            user.email,
+            modifier = Modifier.padding(innerPadding).padding(4.dp),
+            onEdit = { gallery ->
+                itemToEdit = gallery
+                showEditDialog = true
+                }
+        )
         if (showDialog) {
             ProfileDialog(
                 user = user,
@@ -196,6 +211,19 @@ fun GalleryScreen(navController: NavController) {
             }
         }
 
+        if (showEditDialog && itemToEdit != null) {
+            EditDialog(
+                imageUrl = itemToEdit!!.imageUrl,
+                titleInit = itemToEdit!!.title,
+                descriptionInit = itemToEdit!!.description,
+                onDismissRequest = { showEditDialog = false },
+                onUpdate = { newTitle, newDesc ->
+                    viewModel.updateData(itemToEdit!!.id, user.email, newTitle, newDesc)
+                    showEditDialog = false
+                }
+            )
+        }
+
         if (showDeleteDialog && itemToDelete != null) {
             DeleteDialog(
                 onDismissRequest = {
@@ -210,7 +238,6 @@ fun GalleryScreen(navController: NavController) {
             )
         }
 
-
         if (errorMessage != null) {
             Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
             viewModel.clearMessage()
@@ -222,7 +249,8 @@ fun GalleryScreen(navController: NavController) {
 fun ScreenContent(
     viewModel: GalleryViewModel,
     userId: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onEdit: (Gallery) -> Unit
 ) {
     val data by viewModel.data
     val status by viewModel.status.collectAsState()
@@ -257,7 +285,9 @@ fun ScreenContent(
                             itemToDelete = gallery
                             showDeleteDialog = true
                         },
-                        showDelete = userId.isNotEmpty() && userId != "null"
+                        onEditClick = { onEdit(gallery) },
+                        showDelete = userId.isNotEmpty() && userId != "null",
+                        showEdit = userId.isNotEmpty() && userId != "null"
                     )
                 }
             }
@@ -281,7 +311,6 @@ fun ScreenContent(
         }
     }
 
-    // Dialog konfirmasi hapus
     if (showDeleteDialog && itemToDelete != null) {
         DeleteDialog(
             onDismissRequest = { showDeleteDialog = false },
@@ -297,6 +326,8 @@ fun ScreenContent(
 @Composable
 fun ListItem(
     gallery: Gallery,
+    onEditClick: () -> Unit,
+    showEdit: Boolean = true,
     onDeleteClick: () -> Unit,
     showDelete: Boolean = true
 ) {
@@ -313,7 +344,7 @@ fun ListItem(
             contentScale = ContentScale.Crop,
             placeholder = painterResource(id = R.drawable.loading_img),
             error = painterResource(id = R.drawable.baseline_broken_image_24),
-            modifier = Modifier.fillMaxWidth().padding(4.dp)
+            modifier = Modifier.fillMaxWidth().aspectRatio(1f).padding(4.dp)
         )
 
         Row(
@@ -327,8 +358,14 @@ fun ListItem(
             Text(
                 text = gallery.title,
                 fontWeight = FontWeight.Bold,
-                color = Color.White
+                color = Color.White,
+                modifier = Modifier.weight(1f)
             )
+            if (showEdit) {
+                IconButton(onClick = onEditClick) {
+                    Icon(Icons.Default.Edit, contentDescription = "Edit", tint = Color.White)
+                }
+            }
             if (showDelete) {
                 IconButton(onClick = onDeleteClick) {
                     Icon(
@@ -341,8 +378,6 @@ fun ListItem(
         }
     }
 }
-
-
 
 private fun getCroppedImage(
     resolver: ContentResolver,
@@ -362,7 +397,6 @@ private fun getCroppedImage(
         ImageDecoder.decodeBitmap(source)
     }
 }
-
 
 @Preview(showBackground = true)
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)

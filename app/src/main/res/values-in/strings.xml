@@ -83,8 +83,8 @@
     <string name="description">Deskripsi</string>
     <string name="cancel">Batal</string>
     <string name="save">Simpan</string>
-    <string name="delete_gallery">Hapus gambar ini?</string>
-
+    <string name="update_message">Update Data</string>
+    <string name="update_confirm">Update</string>
 
     4. Calculate Scren
     <string name="calculate_description">Mari kita hitung berapa kecepatan rata-rata pembalap di sirkuit, dengan waktu lap kita bisa mengetahui seberapa cepat para pembalap melaju!</string>

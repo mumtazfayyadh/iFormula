@@ -82,6 +82,8 @@
     <string name="description">Description</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
+    <string name="update_message">Update Data</string>
+    <string name="update_confirm">Update</string>
 
     4. Calculate Screen
     <string name="calculate_description">Let\'s calculate what the average speed of the drivers is on the circuit, with lap times we can find out how fast the drivers are driving!</string>

@@ -71,6 +71,32 @@ class GalleryViewModel : ViewModel() {
         }
     }
 
+    fun updateData(id: Int, userId: String, title: String, description: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                Log.d("GalleryViewModel", "📤 Mengupdate data: id=$id, userId=$userId")
+                val result = GalleryApi.service.updateGallery(
+                    id,
+                    userId.toRequestBody("text/plain".toMediaTypeOrNull()),
+                    title.toRequestBody("text/plain".toMediaTypeOrNull()),
+                    description.toRequestBody("text/plain".toMediaTypeOrNull())
+                )
+
+                if (result.status == "success") {
+                    Log.d("GalleryViewModel", "✅ Berhasil update data")
+                    retrieveData(userId)
+                } else {
+                    throw Exception(result.message)
+                }
+            } catch (e: Exception) {
+                Log.e("GalleryViewModel", "❌ Gagal update: ${e.message}")
+                errorMessage.value = "Error: ${e.message}"
+            }
+        }
+    }
+
+
+
     fun deleteItem(id: Int, userId: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {

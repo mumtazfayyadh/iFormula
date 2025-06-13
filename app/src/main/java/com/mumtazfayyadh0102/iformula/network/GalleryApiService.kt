@@ -1,6 +1,5 @@
 package com.mumtazfayyadh0102.iformula.network
 
-import com.mumtazfayyadh0102.iformula.model.Gallery
 import com.mumtazfayyadh0102.iformula.model.GalleryResponse
 import com.mumtazfayyadh0102.iformula.model.OpStatus
 import com.squareup.moshi.Moshi
@@ -11,9 +10,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.DELETE
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -42,6 +41,15 @@ interface GalleryApiService {
         @Part("title") title: RequestBody,
         @Part("description") description: RequestBody,
         @Part image: MultipartBody.Part
+    ): OpStatus
+
+    @Multipart
+    @PUT("photos/{id}")
+    suspend fun updateGallery(
+        @Path("id") id: Int,
+        @Part("userId") userId: RequestBody,
+        @Part("title") title: RequestBody,
+        @Part("description") description: RequestBody
     ): OpStatus
 
     @DELETE("photos/{id}")
