@@ -1,5 +1,6 @@
 package com.mumtazfayyadh0102.iformula.network
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -15,6 +16,7 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "us
 class UserDataStore private constructor(private val context: Context) {
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         @Volatile
         private var INSTANCE: UserDataStore? = null
 
